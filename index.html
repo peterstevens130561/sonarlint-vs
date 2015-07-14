@@ -1,1 +1,127 @@
-<h1>Hello, world!</h1>
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="resources/reset.css" rel="stylesheet" />
+    <link href="resources/main.css" rel="stylesheet" />
+    <link rel="stylesheet" href="resources/font-awesome.min.css">
+    <title>SonarLint for Visual Studio</title>
+</head>
+<body>
+    <div id="body">
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="#Samples">Samples</a></li>
+                    <li><a href="#Integration">Integration</a></li>
+                    <li><a href="#Contribute">Contribute</a></li>
+                    <li><a href="#Feedback">Feedback</a></li>
+                </ul>
+            </nav>
+            <div>
+                <div class="logo">
+                    <img src="resources/waves-sonarqube-256.png" title="SonarLint for Visual Studio" alt="SonarLint for Visual Studio" />
+                </div>
+                <div class="header-content">
+                    <h1>SonarLint for Visual Studio</h1>
+                    <div class="short-description">
+                        SonarLint is a Visual Studio 2015 extension that provides on-the-fly feedback to developers on any new bug or
+                        quality issue injected into C# code.
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <section class="split" id="Description">
+                <div class="left text">
+                    <p>
+                        SonarLint for Visual Studio is based on and benefits from the .NET Compiler Platform ("Roslyn") and its code analysis API
+                        to provide a fully-integrated user experience in Visual Studio 2015.
+                    </p>
+                    <p>
+                        SonarLint is free, available in Visual Studio Gallery, and it's open source.
+                    </p>
+                    <ul>
+                        <li><a class="button-link download" href="https://visualstudiogallery.msdn.microsoft.com/148ea243-c018-4138-9222-4f0e81270f6a" title="Download SonarLint from Visual Studio Gallery">Download</a></li>
+                        <li><a class="button-link github" href="https://github.com/SonarSource/sonarlint-vs" title="SonarLint GitHub">GitHub</a></li>
+                    </ul>
+                </div>
+                <div class="left image">
+                    <img src="resources/vs.png" title="SonarLint in Visual Studio" alt="SonarLint in Visual Studio" />
+                </div>
+            </section>
+            <section class="split sample first" id="Samples">
+                <div class="right text">
+                    <h2>Samples</h2>
+                    Performing a null-check before referencing an object is a good practice, however, when either the equality operator in the null test or the logical operator that 
+                    follows it is reversed, it leads to a guaranteed null pointer dereference. <a href="http://dist.sonarsource.com/csharp/rulesdoc/0.10.0-RC/S1697.html">Rule S1697</a>
+                </div>
+                <div class="right image">
+                    <img src="resources/dasblog.png" title="Null dereferencing" alt="Null dereferencing" />
+                </div>
+            </section>
+            <section class="split sample">
+                <div class="right text">
+                    Using the same value on either side of a binary operator is almost always a mistake. In the case of logical operators, it is either a copy-paste error and 
+                    therefore a bug, or it is simply wasted code, and should be simplified. <a href="http://dist.sonarsource.com/csharp/rulesdoc/0.10.0-RC/S1764.html">Rule S1764</a>
+                </div>
+                <div class="right image">
+                    <img src="resources/roslyn.png" title="Identical sub-expression in binary operation" alt="Identical sub-expression in binary operation" />
+                </div>
+            </section>
+            <section class="split sample last">
+                <div class="right text">
+                    A static field of a generic class is not shared among instances of different close-constructed types. So using such a field might result in unsexpected behavior. 
+                    <a href="http://dist.sonarsource.com/csharp/rulesdoc/0.10.0-RC/S2743.html">Rule S2743</a>
+                </div>
+                <div class="right image">
+                    <img src="resources/akka.png" title="Static field of a generic class" alt="Static field of a generic class" />
+                </div>
+            </section>
+            <section class="split" id="Integration">
+                <div class="left text">
+                    <h2>Integration</h2>
+                    <p>
+                        SonarLint can also be used along with the <a href="http://www.sonarqube.org/" title="SonarQube">SonarQube platform</a> and 
+                        <a href="http://redirect.sonarsource.com/plugins/csharp.html">SonarQube C# plugin</a> to  reinforce a global corporate strategy around the quality of 
+                        source code.
+                    </p>
+                    <p>
+                        SonarQube is an open source platform for continuous inspection of code quality. It is the central place to manage code quality, offering visual reporting 
+                        on and across projects and enabling to replay the past to follow metrics evolution.
+                    </p>
+                </div>
+                <div class="left image">
+                    <img src="resources/SonarQube.png" title="SonarQube" alt="SonarQube" />
+                </div>
+            </section>
+            <section class="split" >
+                <div class="left text fifty" id="Contribute">
+                    <h2>Contribute</h2>
+                    <p>
+                        SonarLint is open source under the LGPLv3 license. You can fork us on GitHub, and submit Pull Requests. Feel free to fix bugs or to implement new features.
+                    </p>
+                    <ul>
+                        <li><a class="button-link github" href="https://github.com/SonarSource/sonarlint-vs" title="SonarLint GitHub">GitHub</a></li>
+                    </ul>
+                </div>
+                <div class="right text fifty" id="Feedback">
+                    <h2>Feedback</h2>
+                    <p>We are constantly monitoring questions posted to StackOverflow. For faster answers mark your questions with [SonarLint], [SonarQube] and [C#] tags.</p>
+                    <ul>
+                        <li><a class="button-link stack-overflow" href="http://stackoverflow.com/search?q=%5Bsonarqube%5D%2C+%5Bc%23%5D" title="SonarLint StackOverflow">StackOverflow</a></li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div>
+                SonarLint is powered by <a href="http://www.sonarsource.com" target="SonarSource SA">SonarSource SA</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
