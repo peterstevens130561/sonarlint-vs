@@ -310,6 +310,16 @@ section.split ul {
    content: '\f16c';
 }
 
+
+@media (max-width: 1300px) {
+	.split.sample .image img {
+		max-width: 600px;
+	}
+	.split.sample .right.image img {
+	  margin-left: -600px;
+	}
+}
+
 @media (max-width: 1000px) {
     section.split:first-child {
         padding: 70px 0 10px 0;
