@@ -5,19 +5,28 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link href="resources/reset.css" rel="stylesheet" />
+    <link href="resources/common.css" rel="stylesheet" />
     <link href="resources/main.css" rel="stylesheet" />
     <link rel="stylesheet" href="resources/font-awesome.min.css">
     <title>SonarLint for Visual Studio</title>
+    <link rel="icon" type="image/png" href="resources/waves-sonarqube-28.png" />
 </head>
 <body>
     <div id="body">
         <header>
             <nav>
                 <ul>
+                    <li>
+                        <a href="index.html">
+                            <img class="nav-icon" src="resources/waves-sonarqube-28.png" title="SonarLint for Visual Studio" alt="SonarLint for Visual Studio" />
+                            <span>Home</span>
+                        </a>
+                    </li>
                     <li><a href="#Samples">Samples</a></li>
                     <li><a href="#Integration">Integration</a></li>
                     <li><a href="#Contribute">Contribute</a></li>
                     <li><a href="#Feedback">Feedback</a></li>
+                    <li><a href="rules/index.html#version=1.0.0&ruleId=S1764">Rules</a></li>
                 </ul>
             </nav>
             <div>
@@ -34,7 +43,7 @@
             </div>
         </header>
         <main>
-            <section class="split" id="Description">
+            <section class="split first" id="Description">
                 <div class="left text">
                     <p>
                         SonarLint for Visual Studio is based on and benefits from the .NET Compiler Platform ("Roslyn") and its code analysis API
@@ -55,7 +64,7 @@
             <section class="split sample first" id="Samples">
                 <div class="right text">
                     <h2>Samples</h2>
-                    Performing a null-check before referencing an object is a good practice, but when either the equality operator in the null test or the logical operator that 
+                    Performing a null-check before referencing an object is a good practice, but when either the equality operator in the null test or the logical operator that
                     follows it is reversed, it leads to a guaranteed null pointer dereference. <a href="http://dist.sonarsource.com/csharp/rulesdoc/0.10.0-RC/S1697.html">Rule S1697</a>
                 </div>
                 <div class="right image">
@@ -64,7 +73,7 @@
             </section>
             <section class="split sample">
                 <div class="right text">
-                    Using the same value on either side of a binary operator is almost always a mistake. In the case of logical operators, it is either a copy-paste error and 
+                    Using the same value on either side of a binary operator is almost always a mistake. In the case of logical operators, it is either a copy-paste error and
                     therefore a bug, or it is simply wasted code, and should be simplified. <a href="http://dist.sonarsource.com/csharp/rulesdoc/0.10.0-RC/S1764.html">Rule S1764</a>
                 </div>
                 <div class="right image">
@@ -73,7 +82,7 @@
             </section>
             <section class="split sample last">
                 <div class="right text">
-                    A static field of a generic class is not shared among instances of different close-constructed types. So using such a field might result in unexpected behavior. 
+                    A static field of a generic class is not shared among instances of different close-constructed types. So using such a field might result in unexpected behavior.
                     <a href="http://dist.sonarsource.com/csharp/rulesdoc/0.10.0-RC/S2743.html">Rule S2743</a>
                 </div>
                 <div class="right image">
@@ -84,8 +93,8 @@
                 <div class="left text">
                     <h2>Integration</h2>
                     <p>
-                        SonarLint can be used in concert with the <a href="http://www.sonarqube.org/" title="SonarQube">SonarQube platform</a> and 
-                        <a href="http://redirect.sonarsource.com/plugins/csharp.html">SonarQube C# plugin</a> to  reinforce a global corporate strategy around the quality of 
+                        SonarLint can be used in concert with the <a href="http://www.sonarqube.org/" title="SonarQube">SonarQube platform</a> and
+                        <a href="http://redirect.sonarsource.com/plugins/csharp.html">SonarQube C# plugin</a> to  reinforce a global corporate strategy around the quality of
                         source code.
                     </p>
                     <p>
@@ -96,7 +105,7 @@
                     <img src="resources/SonarQube.png" title="SonarQube" alt="SonarQube" />
                 </div>
             </section>
-            <section class="split" >
+            <section class="split last">
                 <div class="left text fifty" id="Contribute">
                     <h2>Contribute</h2>
                     <p>

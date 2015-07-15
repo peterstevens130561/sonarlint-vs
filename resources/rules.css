@@ -1,0 +1,185 @@
+﻿main,
+header,
+footer{
+    max-width: 100%;
+    width: 100%;    
+}
+
+header,
+footer,
+.sidebar{
+    position: fixed;
+    z-index: 100;
+    background: rgb(243, 243, 243);
+}
+footer{
+    bottom: 0;
+    clear: both;
+}
+
+header {
+    border-bottom: 1px solid #e6e6e6;
+}
+
+header nav {
+    max-width: 1000px;
+    min-width: 1000px;
+    margin: 0 auto;
+    border-bottom: 0;
+    height: 39px;
+}
+nav a:hover {
+    border-bottom: 0;
+}
+
+
+.sidebar
+{
+    font-size: 13px;
+    width: 300px;
+    float:left;
+    top:40px;
+    bottom:40px;
+}
+
+    .sidebar > div > span {
+        padding: 10px 5px 5px 5px;
+        font-size: 16px;
+        display: block;
+    }
+
+.sidebar:after{
+    background-color: #ddd;
+	content: "";
+	display: block;
+	width: 1px;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.content {
+    margin-left: 300px;
+    font-size: 14px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+.content:after{
+    background-color: #ddd;
+	content: "";
+	display: block;
+	width: 1px;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: -1px;
+}
+
+
+
+/*rule specific*/
+
+.content h1 {
+    margin: 0;
+    font-size: 25px;
+    line-height: 1.5;
+}
+
+.content h2 {
+    font-size: 20px;
+    line-height: 25px;
+    margin-top: 30px;
+}
+
+.content pre {
+    padding: 10px;
+    border: 1px solid #e6e6e6;
+    line-height: 18px;
+    overflow: auto;
+    font-family: Consolas,"Liberation Mono",Menlo,Courier,monospace;
+    font-size: 12px;
+    margin: 1em 0;    
+    background-color: white;
+}
+
+.content code {
+    font-weight: 600;
+    font-family: Consolas,"Liberation Mono",Menlo,Courier,monospace;
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.content .rule-details {
+    padding: 10px;    
+}
+
+.content .rule-description {
+    margin-top: 18px;
+}
+
+.content .rule-meta .id {
+    color: #777;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+}
+
+.content ul {
+    padding-left: 40px;
+    list-style: disc;
+    margin: 1em 0;
+}
+
+.sidebar a{
+    border-bottom: 0;
+}
+
+.sidebar > div  {
+    overflow-x: hidden;
+    white-space: nowrap;
+    padding: 5px 0 5px;
+    height:100%;
+}
+
+.sidebar li:nth-child(2n) {
+    background-color: white;
+}
+
+.sidebar li {
+    position:relative;
+    padding: 1px 5px;
+}
+.sidebar li:after {
+  content: " ";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  /* right: 100%; */
+  right: 0;
+  width: 30px;
+  background-image: linear-gradient(to right,rgba(243,243,243,0),#f3f3f3 75%);
+}
+
+.tags:before{
+    content: '\f02c';
+    font-family: FontAwesome;
+    margin: 0 4px 0 0;
+    text-decoration: none;
+}
+
+
+@media (max-width: 1000px) {
+    .sidebar
+    {
+        width: 250px;
+    }
+    .content {
+        margin-left: 250px;
+    }
+
+    main{
+        width: 1000px;
+    }
+}
+

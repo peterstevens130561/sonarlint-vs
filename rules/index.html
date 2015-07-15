@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="../resources/reset.css" rel="stylesheet" />
+    <link href="../resources/common.css" rel="stylesheet" />
+    <link href="../resources/rules.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../resources/font-awesome.min.css">
+    <title>SonarLint for Visual Studio</title>
+    <link rel="icon" type="image/png" href="../resources/waves-sonarqube-28.png" />
+    
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <a href="../index.html">
+                        <img class="nav-icon" src="../resources/waves-sonarqube-28.png" title="SonarLint for Visual Studio" alt="SonarLint for Visual Studio" />
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li><a href="../index.html#Samples">Samples</a></li>
+                <li><a href="../index.html#Integration">Integration</a></li>
+                <li><a href="../index.html#Contribute">Contribute</a></li>
+                <li><a href="../index.html#Feedback">Feedback</a></li>
+                <li><a href="index.html#version=1.0.0&ruleId=S1764">Rules</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="sidebar">
+            <div id="sidebar-container">
+                <span>Rules</span>
+                <ul data-version="" id="rule-menu"></ul>
+            </div>
+        </div>
+        <div class="content">
+            <div class="rule-details">
+                <div class="rule-meta">
+                    <h1 id="rule-title"></h1>
+                    <span class="id">Rule ID: <span id="rule-id">ERROR</span></span>
+                    <div class="rules-detail-properties">
+                        <span class="tags" id="rule-tags" style="visibility:hidden"></span>
+                    </div>
+                </div>
+                <div class="rule-description" id="rule-description">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div>
+            SonarLint is powered by <a href="http://www.sonarsource.com" target="SonarSource SA">SonarSource SA</a>
+        </div>
+    </footer>
+    <script src="../resources/RuleController.js"></script>
+</body>
+</html>
