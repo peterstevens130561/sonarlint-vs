@@ -26,19 +26,24 @@ var Controllers;
             this.openRequestedPage(hash);
         }
         RuleController.prototype.openRequestedPage = function (hash) {
-            if (!hash.ruleId || !hash.version) {
-                this.handleError();
+            var _this = this;
+            if (!hash.version) {
+                this.handleVersionError();
+                return;
+            }
+            var requestedVersion = hash.version;
+            if (!(new RegExp(/^([a-zA-Z0-9-\.]+)$/)).test(requestedVersion)) {
+                this.handleVersionError();
                 return;
             }
             //display page:
             var self = this;
-            var requestedVersion = hash.version;
-            if (!(new RegExp(/^([a-zA-Z0-9-\.]+)$/)).test(requestedVersion)) {
-                this.handleError();
-                return;
-            }
             this.getRulesJson(requestedVersion, function () {
                 self.displayMenu(hash);
+                if (!hash.ruleId) {
+                    _this.handleRuleIdError();
+                    return;
+                }
                 self.displayRulePage(hash);
             });
         };
@@ -77,15 +82,18 @@ var Controllers;
                     return;
                 }
             }
-            this.handleError();
+            this.handleRuleIdError();
         };
-        RuleController.prototype.handleError = function () {
+        RuleController.prototype.handleRuleIdError = function () {
             document.getElementById("rule-id").innerHTML = "ERROR";
             document.getElementById("rule-title").innerHTML = "";
             var tags = document.getElementById("rule-tags");
             tags.innerHTML = "";
             tags.style.visibility = 'hidden';
             document.getElementById("rule-description").innerHTML = "";
+        };
+        RuleController.prototype.handleVersionError = function () {
+            this.handleRuleIdError();
             var menu = document.getElementById("rule-menu");
             menu.innerHTML = "";
             menu.setAttribute("data-version", "");

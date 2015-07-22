@@ -49,27 +49,31 @@ module Controllers {
         }
 
         public openRequestedPage(hash: UrlParams) {
-            if (!hash.ruleId || !hash.version)
-            {
-                this.handleError();
+            if (!hash.version) {
+                this.handleVersionError();
                 return;
             }
-
-            //display page:
-            var self = this;
-
+            
             var requestedVersion = hash.version;
 
-            if (!(new RegExp(<any>/^([a-zA-Z0-9-\.]+)$/)).test(requestedVersion))
-            {
-                this.handleError();
+            if (!(new RegExp(<any>/^([a-zA-Z0-9-\.]+)$/)).test(requestedVersion)) {
+                this.handleVersionError();
                 return;
             }
-
-            this.getRulesJson(requestedVersion,() => {
+            
+            //display page:
+            var self = this;
+            this.getRulesJson(requestedVersion, () => {
                 self.displayMenu(hash);
-                self.displayRulePage(hash);                
-            });
+
+                if (!hash.ruleId)
+                {
+                    this.handleRuleIdError();
+                    return;
+                }
+
+                self.displayRulePage(hash);
+            });            
         }
 
         private displayMenu(hash: UrlParams) {
@@ -114,17 +118,19 @@ module Controllers {
                     return;
                 }
             }
-            this.handleError();
+            this.handleRuleIdError();
         }
 
-        private handleError()
-        {
+        private handleRuleIdError() {
             document.getElementById("rule-id").innerHTML = "ERROR";
             document.getElementById("rule-title").innerHTML = "";
             var tags = document.getElementById("rule-tags");
             tags.innerHTML = "";
             tags.style.visibility = 'hidden';
             document.getElementById("rule-description").innerHTML = "";
+        }
+        private handleVersionError() {
+            this.handleRuleIdError();
 
             var menu = document.getElementById("rule-menu");
             menu.innerHTML = "";
