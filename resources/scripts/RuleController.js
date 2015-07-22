@@ -9,11 +9,12 @@ location.parseHash = function () {
 var Controllers;
 (function (Controllers) {
     var RuleController = (function () {
-        function RuleController(defaultVersion) {
+        function RuleController(defaultVersion, defaultRule) {
             this.defaultVersion = defaultVersion;
+            this.defaultRule = defaultRule;
             var hash = {
                 version: this.defaultVersion,
-                ruleId: null
+                ruleId: this.defaultRule
             };
             var parsedHash = location.parseHash();
             if (parsedHash.version) {
@@ -92,7 +93,7 @@ var Controllers;
         RuleController.prototype.hashChanged = function () {
             var hash = {
                 version: this.defaultVersion,
-                ruleId: null
+                ruleId: this.defaultRule
             };
             var parsedHash = location.parseHash();
             if (parsedHash.version) {

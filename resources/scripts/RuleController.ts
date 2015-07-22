@@ -28,16 +28,17 @@ interface Rule {
 module Controllers {
     export class RuleController {
         defaultVersion: string;
+        defaultRule: string;
         
-        constructor(defaultVersion: string) {
+        constructor(defaultVersion: string, defaultRule: string) {
             this.defaultVersion = defaultVersion;
+            this.defaultRule = defaultRule;
             var hash: UrlParams = {
                 version: this.defaultVersion,
-                ruleId: null
+                ruleId: this.defaultRule
             };
             var parsedHash = location.parseHash();
-            if (parsedHash.version)
-            {
+            if (parsedHash.version) {
                 hash.version = parsedHash.version;
             }
             if (parsedHash.ruleId) {
@@ -134,7 +135,7 @@ module Controllers {
         {
             var hash: UrlParams = {
                 version: this.defaultVersion,
-                ruleId: null
+                ruleId: this.defaultRule
             };
             var parsedHash = location.parseHash();            
             if (parsedHash.version) {
