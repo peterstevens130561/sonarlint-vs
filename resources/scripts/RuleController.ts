@@ -1,8 +1,4 @@
-﻿interface Location
-{
-    parseHash(): UrlParams;
-}
-interface UrlParams
+﻿interface UrlParams
 {
     version: string;
     ruleId: string;
@@ -13,17 +9,6 @@ interface Rule {
     Description: string;
     Tags: string;
 }
-
-(<any>location).parseHash = function () {
-    var hash = (this.hash || '').replace(/^#/, '').split('&'),
-        parsed = {};
-
-    for (var i = 0, el; i < hash.length; i++) {
-        el = hash[i].split('=')
-        parsed[el[0]] = el[1];
-    }
-    return parsed;
-};
 
 module Controllers {
     export class RuleController {
@@ -37,7 +22,7 @@ module Controllers {
                 version: this.defaultVersion,
                 ruleId: this.defaultRule
             };
-            var parsedHash = location.parseHash();
+            var parsedHash = this.parseHash();
             if (parsedHash.version) {
                 hash.version = parsedHash.version;
             }
@@ -74,6 +59,18 @@ module Controllers {
 
                 self.displayRulePage(hash);
             });            
+        }
+
+        private parseHash(): any
+        {
+            var hash = (location.hash || '').replace(/^#/, '').split('&'),
+                parsed = {};
+
+            for (var i = 0, el; i < hash.length; i++) {
+                el = hash[i].split('=')
+                parsed[el[0]] = el[1];
+            }
+            return parsed;
         }
 
         private displayMenu(hash: UrlParams) {
@@ -143,7 +140,7 @@ module Controllers {
                 version: this.defaultVersion,
                 ruleId: this.defaultRule
             };
-            var parsedHash = location.parseHash();            
+            var parsedHash = this.parseHash();            
             if (parsedHash.version) {
                 hash.version = parsedHash.version;
             }

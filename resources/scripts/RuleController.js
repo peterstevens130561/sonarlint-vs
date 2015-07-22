@@ -1,11 +1,3 @@
-location.parseHash = function () {
-    var hash = (this.hash || '').replace(/^#/, '').split('&'), parsed = {};
-    for (var i = 0, el; i < hash.length; i++) {
-        el = hash[i].split('=');
-        parsed[el[0]] = el[1];
-    }
-    return parsed;
-};
 var Controllers;
 (function (Controllers) {
     var RuleController = (function () {
@@ -16,7 +8,7 @@ var Controllers;
                 version: this.defaultVersion,
                 ruleId: this.defaultRule
             };
-            var parsedHash = location.parseHash();
+            var parsedHash = this.parseHash();
             if (parsedHash.version) {
                 hash.version = parsedHash.version;
             }
@@ -46,6 +38,14 @@ var Controllers;
                 }
                 self.displayRulePage(hash);
             });
+        };
+        RuleController.prototype.parseHash = function () {
+            var hash = (location.hash || '').replace(/^#/, '').split('&'), parsed = {};
+            for (var i = 0, el; i < hash.length; i++) {
+                el = hash[i].split('=');
+                parsed[el[0]] = el[1];
+            }
+            return parsed;
         };
         RuleController.prototype.displayMenu = function (hash) {
             var menu = document.getElementById("rule-menu");
@@ -103,7 +103,7 @@ var Controllers;
                 version: this.defaultVersion,
                 ruleId: this.defaultRule
             };
-            var parsedHash = location.parseHash();
+            var parsedHash = this.parseHash();
             if (parsedHash.version) {
                 hash.version = parsedHash.version;
             }
