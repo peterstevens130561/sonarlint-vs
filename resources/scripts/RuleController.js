@@ -18,7 +18,6 @@ var Controllers;
             this.openRequestedPage(hash);
         }
         RuleController.prototype.openRequestedPage = function (hash) {
-            var _this = this;
             if (!hash.version) {
                 this.handleVersionError();
                 return;
@@ -33,7 +32,7 @@ var Controllers;
             this.getRulesJson(requestedVersion, function () {
                 self.displayMenu(hash);
                 if (!hash.ruleId) {
-                    _this.handleRuleIdError();
+                    self.handleRuleIdError(false);
                     return;
                 }
                 self.displayRulePage(hash);
@@ -67,7 +66,9 @@ var Controllers;
             for (var i = 0; i < this.currentRules.length; i++) {
                 if (this.currentRules[i].Key == hash.ruleId) {
                     //we have found it
-                    document.getElementById("rule-id").innerHTML = this.currentRules[i].Key;
+                    var ruleId = document.getElementById("rule-id");
+                    ruleId.innerHTML = 'Rule ID: ' + this.currentRules[i].Key;
+                    ruleId.style.visibility = 'visible';
                     document.getElementById("rule-title").innerHTML = this.currentRules[i].Title;
                     var tags = document.getElementById("rule-tags");
                     tags.innerHTML = this.currentRules[i].Tags;
@@ -82,10 +83,14 @@ var Controllers;
                     return;
                 }
             }
-            this.handleRuleIdError();
+            this.handleRuleIdError(false);
         };
-        RuleController.prototype.handleRuleIdError = function () {
-            document.getElementById("rule-id").innerHTML = "ERROR";
+        RuleController.prototype.handleRuleIdError = function (hasMenuIssueToo) {
+            if (hasMenuIssueToo) {
+                var ruleId = document.getElementById("rule-id");
+                ruleId.innerHTML = "ERROR: couldn't find rule";
+                ruleId.style.visibility = 'visible';
+            }
             document.getElementById("rule-title").innerHTML = "";
             var tags = document.getElementById("rule-tags");
             tags.innerHTML = "";
@@ -93,10 +98,13 @@ var Controllers;
             document.getElementById("rule-description").innerHTML = "";
         };
         RuleController.prototype.handleVersionError = function () {
-            this.handleRuleIdError();
+            this.handleRuleIdError(true);
             var menu = document.getElementById("rule-menu");
             menu.innerHTML = "";
             menu.setAttribute("data-version", "");
+            var ruleId = document.getElementById("rule-id");
+            ruleId.innerHTML = "ERROR: couldn't find version";
+            ruleId.style.visibility = 'visible';
         };
         RuleController.prototype.hashChanged = function () {
             var hash = {

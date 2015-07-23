@@ -53,7 +53,7 @@ module Controllers {
 
                 if (!hash.ruleId)
                 {
-                    this.handleRuleIdError();
+                    self.handleRuleIdError(false);
                     return;
                 }
 
@@ -99,7 +99,10 @@ module Controllers {
             for (var i = 0; i < this.currentRules.length; i++) {
                 if (this.currentRules[i].Key == hash.ruleId) {
                     //we have found it
-                    document.getElementById("rule-id").innerHTML = this.currentRules[i].Key;
+                    var ruleId = document.getElementById("rule-id");
+                    ruleId.innerHTML = 'Rule ID: ' + this.currentRules[i].Key;
+                    ruleId.style.visibility = 'visible';
+
                     document.getElementById("rule-title").innerHTML = this.currentRules[i].Title;
                     var tags = document.getElementById("rule-tags");
                     tags.innerHTML = this.currentRules[i].Tags;
@@ -115,11 +118,16 @@ module Controllers {
                     return;
                 }
             }
-            this.handleRuleIdError();
+            this.handleRuleIdError(false);
         }
 
-        private handleRuleIdError() {
-            document.getElementById("rule-id").innerHTML = "ERROR";
+        private handleRuleIdError(hasMenuIssueToo: boolean) {
+            if (hasMenuIssueToo) {
+                var ruleId = document.getElementById("rule-id");
+                ruleId.innerHTML = "ERROR: couldn't find rule";
+                ruleId.style.visibility = 'visible';
+            }
+
             document.getElementById("rule-title").innerHTML = "";
             var tags = document.getElementById("rule-tags");
             tags.innerHTML = "";
@@ -127,11 +135,15 @@ module Controllers {
             document.getElementById("rule-description").innerHTML = "";
         }
         private handleVersionError() {
-            this.handleRuleIdError();
+            this.handleRuleIdError(true);
 
             var menu = document.getElementById("rule-menu");
             menu.innerHTML = "";
             menu.setAttribute("data-version", "");
+
+            var ruleId = document.getElementById("rule-id");
+            ruleId.innerHTML = "ERROR: couldn't find version";
+            ruleId.style.visibility = 'visible';
         }
         
         public hashChanged()
