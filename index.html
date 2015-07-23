@@ -74,8 +74,7 @@
                     <h2>Real Bugs in Real Projects</h2>
                     Using the same value on either side of a binary operator is almost always a mistake. In the case of logical operators, it is either a copy-paste error and
                     therefore a bug, or it is simply wasted code, and should be simplified. <a href="rules/index.html#ruleId=S1764">Rule S1764</a>
-					<br /><br /> <!-- FIXME -->
-					<b>Found in Roslyn - linked to the PR</b>
+                    <span class="sample-external">Found in <a href="https://github.com/dotnet/roslyn/pull/2237">Roslyn</a>, <a href="https://github.com/NuGet/NuGet3/pull/41">Nuget</a></span>
                 </div>
                 <div class="right image">
                     <img src="resources/images/roslyn.png" title="Identical sub-expression in binary operation" alt="Identical sub-expression in binary operation" />
@@ -85,8 +84,7 @@
                 <div class="right text">
                     Performing a null-check before referencing an object is a good practice, but when either the equality operator in the null test or the logical operator that
                     follows it is reversed, it leads to a guaranteed null pointer dereference. <a href="rules/index.html#ruleId=S1697">Rule S1697</a>
-					<br /><br /> <!-- FIXME -->
-					</b>Found in Roslyn - lined to the PR</b>
+					<span class="sample-external">Found in <a href="https://github.com/shanselman/dasblog/pull/9">DasBlog</a></span>
                 </div>
                 <div class="right image">
                     <img src="resources/images/dasblog.png" title="Null dereferencing" alt="Null dereferencing" />
@@ -96,8 +94,7 @@
                 <div class="right text">
                     A static field of a generic class is not shared among instances of different close-constructed types. So using such a field might result in unexpected behavior.
                     <a href="rules/index.html#ruleId=S2743">Rule S2743</a>
-					<br /><br /> <!-- FIXME -->
-					</b>Found in Roslyn - lined to the PR</b>
+                    <span class="sample-external">Found in <a href="https://github.com/akkadotnet/akka.net/blob/928ff2b3b23457ea1e4e1d9f0819fca945506a1b/src/contrib/testkits/Akka.TestKit.Xunit/Internals/AkkaAssertEqualityComparer.cs">Akka.NET</a></span>
                 </div>
                 <div class="right image">
                     <img src="resources/images/akka.png" title="Static field of a generic class" alt="Static field of a generic class" />

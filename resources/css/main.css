@@ -34,6 +34,10 @@ section.split.last {
             border-bottom: 0;
         }
 
+        section.split.sample.first div.image{
+            padding-top: 60px;
+        }
+
         section.split.sample.last {
             padding: 10px 0 55px 0;
             border-bottom: 1px solid #e6e6e6;
@@ -220,6 +224,10 @@ section.split ul {
     content: '\f16c';
 }
 
+.sample-external{
+    padding-top:10px;
+    display: inline-block;
+}
 
 @media (max-width: 1300px) {
     .split.sample .image img {
@@ -267,6 +275,9 @@ section.split ul {
     section.split.sample.first {
         padding: 20px 0 0 0;
     }
+    section.split.sample.first div.image{
+            padding-top: 0;
+        }
 
     section.split.sample.last {
         padding: 10px 0 0 0;

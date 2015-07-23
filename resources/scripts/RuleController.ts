@@ -184,8 +184,7 @@ module Controllers {
         }
         loadJSON(path: string, callback: Function) {
             var self = this;
-            var xobj = new XMLHttpRequest();
-            xobj.overrideMimeType("application/json");
+            var xobj = new XMLHttpRequest();            
             xobj.open('GET', path, true); 
             xobj.onload = function () {
                 if (this.status == 200) {

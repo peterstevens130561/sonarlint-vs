@@ -137,7 +137,6 @@ var Controllers;
         RuleController.prototype.loadJSON = function (path, callback) {
             var self = this;
             var xobj = new XMLHttpRequest();
-            xobj.overrideMimeType("application/json");
             xobj.open('GET', path, true);
             xobj.onload = function () {
                 if (this.status == 200) {
