@@ -168,6 +168,12 @@ nav a:hover {
     text-decoration: none;
 }
 
+#sidebar-container > span{
+    display: inline-block;
+}
+#rule-count{
+    font-size: 12px;
+}
 
 @media (max-width: 1000px) {
     .sidebar

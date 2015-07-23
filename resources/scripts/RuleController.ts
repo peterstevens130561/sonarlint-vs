@@ -87,6 +87,8 @@ module Controllers {
                 listItems += '<li><a href="#version=' + this.currentVersion + '&ruleId=' + this.currentRules[i].Key + '" title="' + this.currentRules[i].Title + '">' + this.currentRules[i].Title + '</a></li>';
             }
 
+            document.getElementById("rule-count").innerHTML = '(count: ' + this.currentRules.length + ')';
+
             menu.innerHTML = listItems;
             menu.setAttribute("data-version", this.currentVersion);
         }
@@ -122,7 +124,7 @@ module Controllers {
         }
 
         private handleRuleIdError(hasMenuIssueToo: boolean) {
-            if (hasMenuIssueToo) {
+            if (!hasMenuIssueToo) {
                 var ruleId = document.getElementById("rule-id");
                 ruleId.innerHTML = "ERROR: couldn't find rule";
                 ruleId.style.visibility = 'visible';
@@ -181,11 +183,17 @@ module Controllers {
             callback();
         }
         loadJSON(path: string, callback: Function) {
+            var self = this;
             var xobj = new XMLHttpRequest();
             xobj.overrideMimeType("application/json");
             xobj.open('GET', path, true); 
             xobj.onload = function () {
-                callback(xobj.responseText);
+                if (this.status == 200) {
+                    callback(xobj.responseText);
+                }
+                else {
+                    self.handleVersionError();
+                }
             };
             xobj.send(null);
         }
