@@ -71,27 +71,33 @@
             </section>
             <section class="split sample first" id="Samples">
                 <div class="right text">
-                    <h2>Samples</h2>
-                    Performing a null-check before referencing an object is a good practice, but when either the equality operator in the null test or the logical operator that
-                    follows it is reversed, it leads to a guaranteed null pointer dereference. <a href="http://dist.sonarsource.com/csharp/rulesdoc/0.10.0-RC/S1697.html">Rule S1697</a>
-                </div>
-                <div class="right image">
-                    <img src="resources/images/dasblog.png" title="Null dereferencing" alt="Null dereferencing" />
-                </div>
-            </section>
-            <section class="split sample">
-                <div class="right text">
+                    <h2>Real Bugs in Real Projects</h2>
                     Using the same value on either side of a binary operator is almost always a mistake. In the case of logical operators, it is either a copy-paste error and
-                    therefore a bug, or it is simply wasted code, and should be simplified. <a href="http://dist.sonarsource.com/csharp/rulesdoc/0.10.0-RC/S1764.html">Rule S1764</a>
+                    therefore a bug, or it is simply wasted code, and should be simplified. <a href="rules/index.html#ruleId=S1764">Rule S1764</a>
+					<br /><br /> <!-- FIXME -->
+					<b>Found in Roslyn - linked to the PR</b>
                 </div>
                 <div class="right image">
                     <img src="resources/images/roslyn.png" title="Identical sub-expression in binary operation" alt="Identical sub-expression in binary operation" />
                 </div>
             </section>
+            <section class="split sample">
+                <div class="right text">
+                    Performing a null-check before referencing an object is a good practice, but when either the equality operator in the null test or the logical operator that
+                    follows it is reversed, it leads to a guaranteed null pointer dereference. <a href="rules/index.html#ruleId=S1697">Rule S1697</a>
+					<br /><br /> <!-- FIXME -->
+					</b>Found in Roslyn - lined to the PR</b>
+                </div>
+                <div class="right image">
+                    <img src="resources/images/dasblog.png" title="Null dereferencing" alt="Null dereferencing" />
+                </div>
+            </section>
             <section class="split sample last">
                 <div class="right text">
                     A static field of a generic class is not shared among instances of different close-constructed types. So using such a field might result in unexpected behavior.
-                    <a href="http://dist.sonarsource.com/csharp/rulesdoc/0.10.0-RC/S2743.html">Rule S2743</a>
+                    <a href="rules/index.html#ruleId=S2743">Rule S2743</a>
+					<br /><br /> <!-- FIXME -->
+					</b>Found in Roslyn - lined to the PR</b>
                 </div>
                 <div class="right image">
                     <img src="resources/images/akka.png" title="Static field of a generic class" alt="Static field of a generic class" />
@@ -99,7 +105,7 @@
             </section>
             <section class="split" id="Integration">
                 <div class="left text">
-                    <h2>Integration</h2>
+                    <h2>SonarQube Integration</h2>
                     <p>
                         SonarLint can be used in concert with the <a href="http://www.sonarqube.org/" title="SonarQube">SonarQube platform</a> and
                         <a href="http://redirect.sonarsource.com/plugins/csharp.html">SonarQube C# plugin</a> to  reinforce a global corporate strategy around the quality of
