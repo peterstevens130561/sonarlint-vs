@@ -208,6 +208,7 @@ section.split ul {
 
 .download:after,
 .stack-overflow:after,
+.twitter:after,
 .github:after {
     content: '\f09b';
     font-family: FontAwesome;
@@ -222,6 +223,10 @@ section.split ul {
 
 .stack-overflow:after {
     content: '\f16c';
+}
+
+.twitter:after {
+    content: '\f099';
 }
 
 .sample-external{
