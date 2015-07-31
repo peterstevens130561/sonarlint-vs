@@ -37,8 +37,9 @@ header, main, footer {
 }
 
 footer {
-    min-height: 40px;
-    padding: 10px;
+    height: 27px;
+    padding-top: 3px;
+    padding-bottom: 3px;
     line-height: 1.5;
     border-top: 1px solid #e6e6e6;
     color: #444;
@@ -73,7 +74,7 @@ nav li {
     display: inline-block;
     height: 39px;
     line-height: 39px;
-    width: 16.66%;
+    width: 20%;
     margin: 0;
     padding: 0;
 }
@@ -123,7 +124,7 @@ h2 {
 }
 
 @media (max-width: 1000px) {
-    header, main, footer, #body, section.split, html, body {        
+    header, main, footer, #body, section.split, html, body {
         width: 1000px;
         margin: 0;
         overflow: initial;

@@ -127,14 +127,6 @@ header .logo {
     margin-left: 0;
 }
 
-#Integration .image img {
-    max-width: 980px;
-}
-
-#Integration .left.image img {
-    margin-left: 0;
-}
-
 .split.sample .image img {
     max-width: 800px;
 }
@@ -159,10 +151,6 @@ section.split ul {
 
 #Description .text {
     padding-top: 40px;
-}
-
-#Integration .text {
-    padding-top: 100px;
 }
 
 #Contribute .text {
@@ -262,7 +250,7 @@ section.split ul {
     section.split .right {
         float: none;
     }
-    
+
     section.split .text.left,
     section.split .text.right {
         padding-left: 20px;
@@ -293,7 +281,6 @@ section.split ul {
     }
 
         section.split .image img,
-        #Integration .image img,
         #Description .image img {
             max-width: 100%;
         }
@@ -304,15 +291,14 @@ section.split ul {
 
     section.split {
         padding: 20px 0 0 0;
-    }    
+    }
 
     #Description li {
         display: inline-block;
     }
 
     #Description .text,
-    #Contribute .text,
-    #Integration .text {
+    #Contribute .text {
         padding-top: 0;
     }
 

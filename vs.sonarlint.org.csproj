@@ -39,7 +39,6 @@
       <DependentUpon>RuleController.ts</DependentUpon>
     </Content>
     <Content Include="resources\css\rules.css" />
-    <Content Include="resources\images\SonarQube.png" />
     <Content Include="resources\images\vs.png" />
     <Content Include="resources\images\waves-sonarqube-256.png" />
     <Content Include="resources\images\waves-sonarqube-28.png" />
