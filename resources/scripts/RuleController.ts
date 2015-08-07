@@ -14,7 +14,7 @@ module Controllers {
     export class RuleController {
         defaultVersion: string;
         defaultRule: string;
-        
+
         constructor(defaultVersion: string, defaultRule: string) {
             this.defaultVersion = defaultVersion;
             this.defaultRule = defaultRule;
@@ -30,7 +30,7 @@ module Controllers {
                 hash.ruleId = parsedHash.ruleId;
             }
 
-            this.openRequestedPage(hash);    
+            this.openRequestedPage(hash);
         }
 
         public openRequestedPage(hash: UrlParams) {
@@ -38,14 +38,14 @@ module Controllers {
                 this.handleVersionError();
                 return;
             }
-            
+
             var requestedVersion = hash.version;
 
             if (!(new RegExp(<any>/^([a-zA-Z0-9-\.]+)$/)).test(requestedVersion)) {
                 this.handleVersionError();
                 return;
             }
-            
+
             //display page:
             var self = this;
             this.getRulesJson(requestedVersion, () => {
@@ -58,7 +58,7 @@ module Controllers {
                 }
 
                 self.displayRulePage(hash);
-            });            
+            });
         }
 
         private parseHash(): any
@@ -147,14 +147,14 @@ module Controllers {
             ruleId.innerHTML = "ERROR: couldn't find version";
             ruleId.style.visibility = 'visible';
         }
-        
+
         public hashChanged()
         {
             var hash: UrlParams = {
                 version: this.defaultVersion,
                 ruleId: this.defaultRule
             };
-            var parsedHash = this.parseHash();            
+            var parsedHash = this.parseHash();
             if (parsedHash.version) {
                 hash.version = parsedHash.version;
             }
@@ -176,16 +176,16 @@ module Controllers {
                     self.currentVersion = version;
                     self.currentRules = JSON.parse(jsonString);
                     callback();
-                });   
-                return;             
+                });
+                return;
             }
 
             callback();
         }
         loadJSON(path: string, callback: Function) {
             var self = this;
-            var xobj = new XMLHttpRequest();            
-            xobj.open('GET', path, true); 
+            var xobj = new XMLHttpRequest();
+            xobj.open('GET', path, true);
             xobj.onload = function () {
                 if (this.status == 200) {
                     callback(xobj.responseText);
