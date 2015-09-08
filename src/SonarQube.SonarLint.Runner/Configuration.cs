@@ -105,6 +105,7 @@ namespace SonarLint.Runner
             AddAnalyzerFunctionalComplexity(builder);
             AddAnalyzerClassName(builder);
             AddAnalyzerMethodName(builder);
+            AddAnalyzerFieldName(builder);
             AddAnalyzerMagicNumber(builder);
             AddAnalyzerCommentRegularExpression(builder);
 
@@ -163,6 +164,17 @@ namespace SonarLint.Runner
         private void AddAnalyzerClassName(ImmutableArray<DiagnosticAnalyzer>.Builder builder)
         {
             var analyzer = new ClassName();
+            if (!AnalyzerIds.Contains(analyzer.SupportedDiagnostics.Single().Id))
+            {
+                return;
+            }
+            analyzer.Convention = Parameters[analyzer.SupportedDiagnostics.Single().Id].Single()["format"];
+            builder.Add(analyzer);
+        }
+
+        private void AddAnalyzerFieldName(ImmutableArray<DiagnosticAnalyzer>.Builder builder)
+        {
+            var analyzer = new FieldNameConvention();
             if (!AnalyzerIds.Contains(analyzer.SupportedDiagnostics.Single().Id))
             {
                 return;

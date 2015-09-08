@@ -30,17 +30,17 @@ using SonarLint.Helpers;
 namespace SonarLint.Rules
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [SqaleConstantRemediation("5min")]
-    [SqaleSubCharacteristic(SqaleSubCharacteristic.Readability)]
+    [SqaleConstantRemediation("1hr")]
+    [SqaleSubCharacteristic(SqaleSubCharacteristic.LogicReliability)]
     [Rule(DiagnosticId, RuleSeverity, Title, IsActivatedByDefault)]
-    [Tags("convention")]
-    public class ComparisonNaN : DiagnosticAnalyzer
+    [Tags("oldstyle")]
+    public class RegionInDeclaration : DiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "BHI1003";
-        internal const string Title = "Private Field names should follow a convention";
+        internal const string DiagnosticId = "BHI1006";
+        internal const string Title = "Regions should not be used in declarations";
         internal const string Description =
-            "Can't compare with Double.NaN";
-        internal const string MessageFormat = "Rename this field \"{1}\" to match the regular expression: {0}";
+            "If your class is so big that you need regions, then you should split your class";
+        internal const string MessageFormat = "Make your class smaller so that you do not need regions";
         internal const string Category = "SonarQube";
         internal const Severity RuleSeverity = Severity.Major;
         internal const bool IsActivatedByDefault = true;
@@ -58,34 +58,25 @@ namespace SonarLint.Rules
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var expression = (FieldDeclarationSyntax)c.Node;
-                    foreach (SyntaxNode child in expression.ChildNodes())
-                    {
-                        var member = child as MemberAccessExpressionSyntax;
-                        
-                        if (member == null)
+                    var trivias = c.Node.DescendantTrivia(node =>
+                      {
+                          return !node.IsKind(SyntaxKind.Block);
+                      });
+                        foreach(var trivia in trivias)
                         {
-                            continue;
+                            if (trivia.IsKind((SyntaxKind.RegionDirectiveTrivia)))
+                            {
+                                var diagnostic = Diagnostic.Create(Rule, trivia.GetLocation());
+                                c.ReportDiagnostic(diagnostic);
+                            }
                         }
-                        var exp = member.Expression as IdentifierNameSyntax;
-                        if(exp==null)
-                        {
-                            continue;
-                        }
-                        if (exp.Identifier.Text == "Double" && member.Name.Identifier.Text == "NaN")
-                        {
-                            c.ReportDiagnostic(Diagnostic.Create(Rule, expression.GetLocation()));
-                        }
+                }
 
-                    }
+               ,
+                SyntaxKind.FieldDeclaration,
+                SyntaxKind.PropertyDeclaration,
+                SyntaxKind.MethodDeclaration
 
-                },
-                SyntaxKind.NotEqualsExpression,
-                SyntaxKind.EqualsExpression,
-                SyntaxKind.GreaterThanExpression,
-                SyntaxKind.GreaterThanOrEqualExpression,
-                SyntaxKind.LessThanOrEqualExpression,
-                SyntaxKind.LessThanExpression
              );
         }
     }

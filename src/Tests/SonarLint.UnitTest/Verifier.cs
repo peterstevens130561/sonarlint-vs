@@ -46,11 +46,11 @@ namespace SonarLint.UnitTest
                 .Where(diag => diag.Id == diagnosticAnalyzer.SupportedDiagnostics.Single().Id))
             {
                 var line = diagnostic.GetLineNumberToReport();
-                expected.Should().Contain(line);
+                expected.Should().Contain(line,"the missing item is mistakingly reported as noncompliant");
                 expected.Remove(line);
             }
 
-            expected.Should().BeEquivalentTo(Enumerable.Empty<int>());
+            expected.Should().BeEquivalentTo(Enumerable.Empty<int>(),"the unexpected items are not reported");
         }
 
         internal static IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation,

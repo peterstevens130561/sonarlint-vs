@@ -94,6 +94,7 @@
     <Compile Include="Common\RuleDescriptors\SqaleDescriptor.cs" />
     <Compile Include="Common\RuleDescriptors\SqaleRemediation.cs" />
     <Compile Include="Common\RuleDescriptors\SqaleRemediationProperty.cs" />
+    <Compile Include="Rules\FieldNameConvention.cs" />
     <Compile Include="Utilities\RuleDetailBuilder.cs" />
     <Compile Include="Utilities\RuleFinder.cs" />
     <Compile Include="Rules\ClassName.cs" />
@@ -150,6 +151,12 @@
       <Project>{d1ae804f-ae78-4883-b3d6-9e3c4026def6}</Project>
       <Name>SonarLint</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Rules.Description\BHI1000.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Rules.Description\BHI1001.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
