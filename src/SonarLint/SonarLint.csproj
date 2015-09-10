@@ -81,6 +81,7 @@
     <Compile Include="..\AssemblyInfo.Shared.cs">
       <Link>Properties\AssemblyInfo.Shared.cs</Link>
     </Compile>
+    <Compile Include="BHI.Rules\StringLocalization.cs" />
     <Compile Include="BHI.Rules\RegionInDeclaration.cs" />
     <Compile Include="BHI.Rules\RegionInBlock.cs" />
     <Compile Include="BHI.Rules\ComparisonNaN.cs" />
@@ -480,6 +481,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Rules.Description\BHI1005.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Rules.Description\BHI1007.html" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Rules.Description\BHI1006.html" />
