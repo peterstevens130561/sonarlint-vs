@@ -1,0 +1,19 @@
+<p>
+Condition compilation is really an anti-pattern.</p>
+    <dl>
+        <li><
+It's nearly impossible to test in a meaningful way because the code depends on the environment
+        </li>
+        <li>
+It's very dangerous to make edits because you have to test your change under so many different conditions
+            </li>
+        <li>
+It's hard to read the code because you have to know the value of many external factors
+                </li>
+        <li>
+The combinatorial complexity of all these flags makes a large number of configurations that have to be reasoned about
+            </li>
+        <li>
+You have to recompile a large amount of code to see if you broke anything
+            </li>
+    </dl>
