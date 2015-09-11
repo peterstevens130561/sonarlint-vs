@@ -30,7 +30,7 @@ using SonarLint.Helpers;
 namespace SonarLint.Rules
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [SqaleConstantRemediation("1hr")]
+    [SqaleConstantRemediation("1h")]
     [SqaleSubCharacteristic(SqaleSubCharacteristic.LogicReliability)]
     [Rule(DiagnosticId, RuleSeverity, Title, IsActivatedByDefault)]
     [Tags("oldstyle")]

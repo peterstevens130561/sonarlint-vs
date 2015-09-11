@@ -81,6 +81,7 @@
     <Compile Include="..\AssemblyInfo.Shared.cs">
       <Link>Properties\AssemblyInfo.Shared.cs</Link>
     </Compile>
+    <Compile Include="BHI.Rules\CommentedOutAssert.cs" />
     <Compile Include="BHI.Rules\StringLocalization.cs" />
     <Compile Include="BHI.Rules\RegionInDeclaration.cs" />
     <Compile Include="BHI.Rules\RegionInBlock.cs" />

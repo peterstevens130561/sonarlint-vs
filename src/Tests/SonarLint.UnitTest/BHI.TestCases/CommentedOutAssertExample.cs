@@ -7,19 +7,24 @@ namespace Tests.Diagnostics
 
     class StringLocalizationExample
     {
-        String myString = "12345"; //Noncompliant
 
-        static void Main(string[] args)
+           [TestMethod]
+            public void MyOkTest()
         {
-            String mies = "mies"; //Noncompliant
-            String john = "aap" + mies; // Noncompliant
-            var myvar = "myvar"; // Noncompliant
-            var literal = @"mystring";
-            var myint = 4;
-            bool mybool = 6;
-            var someexpression = 4 + 5;
-            var somethingwithString = myvar.StartsWith("shouldBeInternationalized"); //Noncompliant
-            var somethingElse = myvar.StartsWith(@"shouldNotBeInternationalized"); 
+            int i = 1;
+            int b = 2;
+            Assert.AssertEquals(i, 4);
+
+        }
+
+        [TestMethod]
+        public void MyFailingTest()
+        {
+            int i = 1;
+            // Noncompliant: i.Should().BeEquivalentTo
+            int b = 2;
+            // i=i+1;
+            // Noncompliant: Assert.AssertEquals(i, 4); 
         }
 
     }
