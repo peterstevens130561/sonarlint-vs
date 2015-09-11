@@ -123,6 +123,7 @@
       <Link>Properties\AssemblyInfo.Shared.cs</Link>
     </Compile>
     <Compile Include="Attributes\SqaleTest.cs" />
+    <Compile Include="BHI.Rules\CommentedOutAssertTest.cs" />
     <Compile Include="BHI.Rules\StringLocalizationTest.cs" />
     <Compile Include="BHI.Rules\RegionInDeclarationTest.cs" />
     <Compile Include="BHI.Rules\RegionInBlockTest.cs" />
@@ -138,6 +139,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="BHI.TestCases\RegionInBlockExample.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="BHI.TestCases\CommentedOutAssertExample.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Compile Include="Common\DistrubtionTest.cs" />
