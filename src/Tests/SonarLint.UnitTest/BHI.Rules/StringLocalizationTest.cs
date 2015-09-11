@@ -24,13 +24,13 @@ using SonarLint.Rules;
 namespace SonarLint.UnitTest.Rules
 {
     [TestClass]
-    public class ComparisonNanTest
+    public class StringLocalizationTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ComparisonNaN()
+        public void StringLocalization()
         {
-            Verifier.Verify(@"BHI.TestCases\StringLocalizationExample.cs", new ComparisonNaN());
+            Verifier.Verify(@"BHI.TestCases\StringLocalizationExample.cs", new StringLocalization());
         }
     }
 }

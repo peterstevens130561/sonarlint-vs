@@ -30,7 +30,7 @@ using SonarLint.Helpers;
 namespace SonarLint.Rules
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [SqaleSubCharacteristic(SqaleSubCharacteristic.ExceptionHandling)]
+    [SqaleSubCharacteristic(SqaleSubCharacteristic.MaintainabilityCompliance)]
     [SqaleConstantRemediation("5min")]
     [Rule(DiagnosticId, RuleSeverity, Title, IsActivatedByDefault)]
     [Tags("ancient")]

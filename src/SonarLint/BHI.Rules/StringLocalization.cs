@@ -36,7 +36,7 @@ namespace SonarLint.Rules
     [Tags("bug")]
     public class StringLocalization : DiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "BHI1006";
+        internal const string DiagnosticId = "BHI1007";
         internal const string Title = "Possible string localization";
         internal const string Description =
             "Possible string localization";
@@ -59,6 +59,16 @@ namespace SonarLint.Rules
                 c =>
                 {
                     var expression = (LiteralExpressionSyntax)c.Node;
+                    if(!expression.IsKind(SyntaxKind.StringLiteralExpression))
+                    {
+                        return;
+                    }
+                    var token = expression.Token;
+                    var text = token.ToString();
+                    if(text.StartsWith("@"))
+                    {
+                        return;
+                    }
                     var diagnostic = Diagnostic.Create(Rule, expression.GetLocation());
                     c.ReportDiagnostic(diagnostic);
 
