@@ -64,12 +64,13 @@ namespace SonarLint.Rules
 
                     if (parameterlist.Count > Convention)
                     {
-                        var diagnostic = Diagnostic.Create(Rule, constructorDeclaration.GetLocation(), Convention, constructorDeclaration.GetText);
+                        var diagnostic = Diagnostic.Create(Rule, constructorDeclaration.GetLocation(), Convention, constructorDeclaration.GetText());
                         c.ReportDiagnostic(diagnostic);
                     }
                 }
-                ),
-                SyntaxKind.ConstructorDeclaration
+                ,
+                SyntaxKind.ConstructorDeclaration);
+           
         }
     }
 }

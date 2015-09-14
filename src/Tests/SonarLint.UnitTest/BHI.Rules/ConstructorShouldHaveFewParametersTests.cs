@@ -26,11 +26,15 @@ namespace SonarLint.UnitTest.Rules
     [TestClass]
     public class ConstructorShouldHaveFewParametersTest
     {
+        private readonly int MaxParametersForConstructor = 3;
+
         [TestMethod]
         [TestCategory("Rule")]
         public void StringLocalization()
         {
-            Verifier.Verify(@"BHI.TestCases\ConstructorShouldHaveFewParametersExample.cs", new ConstructorShouldHaveFewParameters());
+            var rule = new ConstructorShouldHaveFewParameters();
+            rule.Convention = MaxParametersForConstructor;
+            Verifier.Verify(@"BHI.TestCases\ConstructorShouldHaveFewParametersExample.cs", rule);
         }
     }
 }

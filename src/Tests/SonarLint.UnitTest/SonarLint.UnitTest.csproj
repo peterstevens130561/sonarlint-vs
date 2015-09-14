@@ -155,6 +155,9 @@
     <Compile Include="BHI.TestCases\ConstructorShouldHaveFewParametersExample.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <None Include="BHI.TestCases\ObsoleteExample.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Compile Include="Common\DistrubtionTest.cs" />
     <Compile Include="Common\RuleDescriptorTest.cs" />
     <Compile Include="Common\RuleFinderTest.cs" />
