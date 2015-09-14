@@ -24,13 +24,13 @@ using SonarLint.Rules;
 namespace SonarLint.UnitTest.Rules
 {
     [TestClass]
-    public class RegionInBlockTest
+    public class Test
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void RegionInBlockExample()
+        public void RuleTest()
         {
-            Verifier.Verify(@"BHI.TestCases\RegionInBlockExample.cs", new RegionInBlock());
+            //Verifier.Verify(@"BHI.TestCases\Example.cs", new Test());
         }
     }
 }

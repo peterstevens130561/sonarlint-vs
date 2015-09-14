@@ -24,13 +24,13 @@ using SonarLint.Rules;
 namespace SonarLint.UnitTest.Rules
 {
     [TestClass]
-    public class RegionInBlockTest
+    public class ConstructorShouldHaveFewParametersTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void RegionInBlockExample()
+        public void StringLocalization()
         {
-            Verifier.Verify(@"BHI.TestCases\RegionInBlockExample.cs", new RegionInBlock());
+            Verifier.Verify(@"BHI.TestCases\ConstructorShouldHaveFewParametersExample.cs", new ConstructorShouldHaveFewParameters());
         }
     }
 }
