@@ -24,13 +24,15 @@ using SonarLint.Rules;
 namespace SonarLint.UnitTest.Rules
 {
     [TestClass]
-    public class TestTemplate
+    public class ObsoleteTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void RuleTest()
+        public void Obsolete()
         {
-            //Verifier.Verify(@"BHI.TestCases\Example.cs", new Test());
+            var obsolete = new Obsolete();
+            obsolete.Convention = "since 2016.1 use .*$";
+            Verifier.Verify(@"BHI.TestCases\ObsoleteExample.cs", obsolete);
         }
     }
 }

@@ -126,6 +126,7 @@
     <Compile Include="BHI.Rules\CommentedOutAssertTest.cs" />
     <Compile Include="BHI.Rules\StringLocalizationTest .cs" />
     <Compile Include="BHI.Rules\ConstructorShouldHaveFewParametersTests.cs" />
+    <Compile Include="BHI.Rules\ObsoleteTest.cs" />
     <Compile Include="BHI.Rules\Test.cs" />
     <Compile Include="BHI.Rules\RegionInDeclarationTest.cs" />
     <Compile Include="BHI.Rules\RegionInBlockTest.cs" />

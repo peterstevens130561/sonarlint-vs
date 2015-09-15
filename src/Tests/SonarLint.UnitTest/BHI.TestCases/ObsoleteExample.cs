@@ -9,6 +9,33 @@ namespace Tests.Diagnostics
     class StringLocalizationExample
 
     {
+        public voikd myfun()
+        {
+            MethodWithDeprecatedAttribute();
+        }
+
+        /// <summary>
+        /// Deprecated method 
+        /// </summary>
+        /// <deprecated>
+        /// <see cref="myotherfunction"/>
+        /// </deprecated>
+        [Obsolete("since 2016.1 use anothermethod")]
+        public void MethodWithDeprecatedAttribute()
+        {
+
+        }
+        [Obsolete("goblediegok")] //Noncompliant
+        public void MethodWithDeprecatedAttribute()
+        {
+
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <deprecated since="2016.1">
+        /// <see cref="somefunction"/>
+        /// </deprecated>
         [Obsolete] // Noncompliant
         public void  IncompleteObsoleteAttribute()
         {
@@ -21,11 +48,8 @@ namespace Tests.Diagnostics
 
         }
 
-        [Deprecated]
-        public void DeprecatedAttribute()
-        {
+        
 
-        }
 
     }
 }
