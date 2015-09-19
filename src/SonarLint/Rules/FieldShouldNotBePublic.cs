@@ -67,6 +67,11 @@ namespace SonarLint.Rules
                 c =>
                 {
                     var fieldDeclaration = (FieldDeclarationSyntax) c.Node;
+                    var classDeclaration = (ClassDeclarationSyntax)fieldDeclaration.Parent;
+                    var name = classDeclaration.Identifier.Text.ToString();
+                    if (name.EndsWith("Data")) {
+                        return;
+                    }
                     foreach (var field in fieldDeclaration.Declaration.Variables
                         .Select(variableDeclaratorSyntax => new
                         {
