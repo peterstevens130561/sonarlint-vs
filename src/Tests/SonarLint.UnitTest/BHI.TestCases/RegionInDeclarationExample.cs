@@ -11,7 +11,7 @@ namespace Tests.Diagnostics
         public static object[] os = new int[0];
         public static object[] os2 = new object[0];
         private const int myConst = 4;
-
+        #endregion
         #region propertyregion //Noncompliant
         public String month { get; set; }
         #endregion

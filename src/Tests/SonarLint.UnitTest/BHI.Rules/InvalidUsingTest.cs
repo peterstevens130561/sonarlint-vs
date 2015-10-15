@@ -1,5 +1,4 @@
 ﻿/*
-/*
  * SonarLint for Visual Studio
  * Copyright (C) 2015 SonarSource
  * sonarqube@googlegroups.com
@@ -25,13 +24,15 @@ using SonarLint.Rules;
 namespace SonarLint.UnitTest.Rules
 {
     [TestClass]
-    public class CommentedOutAssertTest
+    public class InvalidUsingTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void CommentedOutAssert()
+        public void InvalidUsing()
         {
-            Verifier.Verify(@"BHI.TestCases\CommentedOutAssertExample.cs", new CommentedOutAssert());
+            var invalidUsing = new InvalidUsing();
+            invalidUsing.Convention = "oh yeah";
+            Verifier.Verify(@"BHI.TestCases\InvalidUsingExample.cs", new InvalidUsing());
         }
     }
 }

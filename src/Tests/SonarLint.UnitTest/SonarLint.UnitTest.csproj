@@ -123,6 +123,7 @@
       <Link>Properties\AssemblyInfo.Shared.cs</Link>
     </Compile>
     <Compile Include="Attributes\SqaleTest.cs" />
+    <Compile Include="BHI.Rules\InvalidUsingTest.cs" />
     <Compile Include="BHI.Rules\CommentedOutAssertTest.cs" />
     <Compile Include="BHI.Rules\StringLocalizationTest .cs" />
     <Compile Include="BHI.Rules\ConstructorShouldHaveFewParametersTests.cs" />
@@ -151,6 +152,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="BHI.TestCases\Example.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="BHI.TestCases\InvalidUsingExample.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Compile Include="BHI.TestCases\ConstructorShouldHaveFewParametersExample.cs">

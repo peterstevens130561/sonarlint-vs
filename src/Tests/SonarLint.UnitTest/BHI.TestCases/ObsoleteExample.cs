@@ -30,14 +30,15 @@ namespace Tests.Diagnostics
         {
 
         }
+
         /// <summary>
         /// 
         /// </summary>
         /// <deprecated since="2016.1">
         /// <see cref="somefunction"/>
         /// </deprecated>
-        [Obsolete] // Noncompliant
-        public void  IncompleteObsoleteAttribute()
+        [ObsoleteAttribute] // Noncompliant
+        public void  IncompleteObsoleteAttributeFull()
         {
 
         }
@@ -48,7 +49,16 @@ namespace Tests.Diagnostics
 
         }
 
-        
+        [System.Obsolete] // Noncompliant
+        public void IncompleteObsoleteAttribute()
+        {
+
+        }
+        [MyObsolete] 
+        public void IncompleteObsoleteAttribute()
+        {
+
+        }
 
 
     }
