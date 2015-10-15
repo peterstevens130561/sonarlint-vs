@@ -30,7 +30,18 @@ namespace SonarLint.UnitTest.Rules
         [TestCategory("Rule")]
         public void VirtualEventField()
         {
-            Verifier.Verify(@"TestCases\VirtualEventField.cs", new VirtualEventField());
+            Verifier.VerifyAnalyzer(@"TestCases\VirtualEventField.cs", new VirtualEventField());
+        }
+
+        [TestMethod]
+        [TestCategory("CodeFix")]
+        public void VirtualEventField_CodeFix()
+        {
+            Verifier.VerifyCodeFix(
+                @"TestCases\VirtualEventField.cs",
+                @"TestCases\VirtualEventField.Fixed.cs",
+                new VirtualEventField(),
+                new VirtualEventFieldCodeFixProvider());
         }
     }
 }

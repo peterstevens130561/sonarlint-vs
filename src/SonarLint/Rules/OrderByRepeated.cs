@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -27,7 +26,6 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarLint.Common;
 using SonarLint.Common.Sqale;
 using SonarLint.Helpers;
-using Microsoft.CodeAnalysis.Text;
 
 namespace SonarLint.Rules
 {
@@ -63,7 +61,7 @@ namespace SonarLint.Rules
                 c =>
                 {
                     var outerInvocation = (InvocationExpressionSyntax)c.Node;
-                    if (!IsMethodOrderByExtensionCall(outerInvocation, c.SemanticModel))
+                    if (!IsMethodOrderByExtension(outerInvocation, c.SemanticModel))
                     {
                         return;
                     }
@@ -75,7 +73,8 @@ namespace SonarLint.Rules
                     }
 
                     var innerInvocation = memberAccess.Expression as InvocationExpressionSyntax;
-                    if (!IsMethodOrderByExtensionCall(innerInvocation, c.SemanticModel))
+                    if (!IsMethodOrderByExtension(innerInvocation, c.SemanticModel) &&
+                        !IsMethodThenByExtension(innerInvocation, c.SemanticModel))
                     {
                         return;
                     }
@@ -84,7 +83,7 @@ namespace SonarLint.Rules
                 },
                 SyntaxKind.InvocationExpression);
         }
-        private static bool IsMethodOrderByExtensionCall(InvocationExpressionSyntax invocation, SemanticModel semanticModel)
+        private static bool IsMethodOrderByExtension(InvocationExpressionSyntax invocation, SemanticModel semanticModel)
         {
             if (invocation == null)
             {
@@ -97,6 +96,29 @@ namespace SonarLint.Rules
                    methodSymbol.Name == "OrderBy" &&
                    methodSymbol.MethodKind == MethodKind.ReducedExtension &&
                    CollectionEmptinessChecking.MethodIsOnIEnumerable(methodSymbol, semanticModel);
+        }
+        private static bool IsMethodThenByExtension(InvocationExpressionSyntax invocation, SemanticModel semanticModel)
+        {
+            if (invocation == null)
+            {
+                return false;
+            }
+
+            var methodSymbol = semanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
+
+            return methodSymbol != null &&
+                   methodSymbol.Name == "ThenBy" &&
+                   methodSymbol.MethodKind == MethodKind.ReducedExtension &&
+                   MethodIsOnIOrderedEnumerable(methodSymbol);
+        }
+
+        private static bool MethodIsOnIOrderedEnumerable(IMethodSymbol methodSymbol)
+        {
+            var receiverType = methodSymbol.ReceiverType as INamedTypeSymbol;
+
+            return receiverType != null &&
+                   receiverType.ConstructedFrom.ContainingNamespace.ToString() == "System.Linq" &&
+                   receiverType.ConstructedFrom.MetadataName == "IOrderedEnumerable`1";
         }
     }
 }

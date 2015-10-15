@@ -30,7 +30,18 @@ namespace SonarLint.UnitTest.Rules
         [TestCategory("Rule")]
         public void UnaryPrefixOperatorRepeated()
         {
-            Verifier.Verify(@"TestCases\UnaryPrefixOperatorRepeated.cs", new UnaryPrefixOperatorRepeated());
+            Verifier.VerifyAnalyzer(@"TestCases\UnaryPrefixOperatorRepeated.cs", new UnaryPrefixOperatorRepeated());
+        }
+
+        [TestMethod]
+        [TestCategory("CodeFix")]
+        public void UnaryPrefixOperatorRepeated_CodeFix()
+        {
+            Verifier.VerifyCodeFix(
+                @"TestCases\UnaryPrefixOperatorRepeated.cs",
+                @"TestCases\UnaryPrefixOperatorRepeated.Fixed.cs",
+                new UnaryPrefixOperatorRepeated(),
+                new UnaryPrefixOperatorRepeatedCodeFixProvider());
         }
     }
 }

@@ -8,7 +8,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SonarLint.UnitTest</RootNamespace>
     <AssemblyName>SonarLint.UnitTest</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -167,7 +167,8 @@
     <Compile Include="Common\RuleDescriptorTest.cs" />
     <Compile Include="Common\RuleFinderTest.cs" />
     <Compile Include="Common\RuleTest.cs" />
-    <Compile Include="DocGenerator\DocGeneratorTest.cs" />
+    <Compile Include="PackagingTests\VsixTest.cs" />
+    <Compile Include="PackagingTests\DocGeneratorTest.cs" />
     <Compile Include="Helpers\DiagnosticAnalyzerContextHelperTest.cs" />
     <Compile Include="Helpers\DiagnosticReportHelperTest.cs" />
     <Compile Include="Helpers\NavigationHelperTest.cs" />
@@ -176,7 +177,8 @@
     <Compile Include="Common\MetricsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BHI.Rules\ComparisonNanTest.cs" />
-    <Compile Include="Rules\MethodParameterUnusedTest.cs" />
+    <Compile Include="Rules\RedundantArgumentTest.cs" />
+    <Compile Include="Rules\ConditionalSimplificationTest.cs" />    <Compile Include="Rules\MethodParameterUnusedTest.cs" />
     <Compile Include="Rules\MemberShadowsOuterStaticMemberTest.cs" />
     <Compile Include="Rules\OrderByRepeatedTest.cs" />
     <Compile Include="Rules\SuppressFinalizeUselessTest.cs" />
@@ -455,13 +457,17 @@
     <None Include="TestCases\MemberShadowsOuterStaticMember.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestCases\ComparisonNaN.cs">
+   <None Include="TestCases\RedundantParentheses.Fixed.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestCases\OrderByRepeated.Fixed.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>    <None Include="TestCases\ComparisonNaN.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="TestCases\FieldName.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <Compile Include="Verifier.cs" />
+    </None>    <Compile Include="Verifier.cs" />
     <None Include="TestCases\UseCurlyBraces.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -601,6 +607,10 @@
     <ProjectReference Include="..\..\SonarLint.Extra\SonarLint.Extra.csproj">
       <Project>{4c1bb6ce-645f-400b-b491-af7bb40e5c01}</Project>
       <Name>SonarLint.Extra</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SonarLint.Vsix\SonarLint.Vsix.csproj">
+      <Project>{9d2df65b-8bb4-4f85-8b71-c4b636513ef3}</Project>
+      <Name>SonarLint.Vsix</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\SonarLint\SonarLint.csproj">
       <Project>{d1ae804f-ae78-4883-b3d6-9e3c4026def6}</Project>

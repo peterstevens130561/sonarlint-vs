@@ -29,29 +29,99 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarLint.Helpers;
+using Microsoft.CodeAnalysis.CodeFixes;
+using Microsoft.CodeAnalysis.CodeActions;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarLint.UnitTest
 {
     public static class Verifier
     {
-        public static void Verify(Project project, DiagnosticAnalyzer diagnosticAnalyzer)
+        #region Verify*
+
+        public static void VerifyAnalyzer(string path, DiagnosticAnalyzer diagnosticAnalyzer)
         {
-            var compilation = project.GetCompilationAsync().Result;
-
-            var compilationWithAnalyzer = GetDiagnostics(compilation, diagnosticAnalyzer);
-
-            var expected = new List<int>(ExpectedIssues(compilation.SyntaxTrees.First()));
-            foreach (var diagnostic in compilationWithAnalyzer
-
-                .Where(diag => diag.Id == diagnosticAnalyzer.SupportedDiagnostics.Single().Id))
-            {
-                var line = diagnostic.GetLineNumberToReport();
-                expected.Should().Contain(line,"the missing item is mistakingly reported as noncompliant");
-                expected.Remove(line);
-            }
-
-            expected.Should().BeEquivalentTo(Enumerable.Empty<int>(),"the unexpected items are not reported");
+            Verify(path, "foo", diagnosticAnalyzer);
         }
+
+        public static void VerifyAnalyzerInTest(string path, DiagnosticAnalyzer diagnosticAnalyzer)
+        {
+            Verify(path, ProjectTypeHelper.TestAssemblyNamePattern, diagnosticAnalyzer);
+        }
+
+        public static void VerifyCodeFix(string path, string pathToExpected, DiagnosticAnalyzer diagnosticAnalyzer,
+            CodeFixProvider codeFixProvider)
+        {
+            VerifyCodeFix(path, pathToExpected, diagnosticAnalyzer, codeFixProvider, null);
+        }
+        public static void VerifyCodeFix(string path, string pathToExpected, DiagnosticAnalyzer diagnosticAnalyzer,
+            CodeFixProvider codeFixProvider, string codeFixTitle)
+        {
+            var fileInput = new FileInfo(path);
+
+            using (var workspace = new AdhocWorkspace())
+            {
+                var document = GetDocument(fileInput, "foo", workspace);
+
+                List<Diagnostic> diagnostics;
+                string actualCode;
+                CalculateDiagnosticsAndCode(diagnosticAnalyzer, document, out diagnostics, out actualCode);
+
+                Assert.AreNotEqual(0, diagnostics.Count);
+
+                string codeBeforeFix;
+                var codeFixExecutedAtLeastOnce = false;
+
+                do
+                {
+                    codeBeforeFix = actualCode;
+
+                    for (int diagnosticIndexToFix = 0; diagnosticIndexToFix < diagnostics.Count; diagnosticIndexToFix++)
+                    {
+                        var codeActionsForDiagnostic = GetCodeActionsForDiagnostic(codeFixProvider, document, diagnostics[diagnosticIndexToFix]);
+
+                        CodeAction codeActionToExecute;
+                        if (TryGetCodeActionToApply(codeFixTitle, codeActionsForDiagnostic, out codeActionToExecute))
+                        {
+                            document = ApplyCodeFix(document, codeActionToExecute);
+                            CalculateDiagnosticsAndCode(diagnosticAnalyzer, document, out diagnostics, out actualCode);
+
+                            codeFixExecutedAtLeastOnce = true;
+                            break;
+                        }
+                    }
+                } while (codeBeforeFix != actualCode);
+
+                Assert.IsTrue(codeFixExecutedAtLeastOnce);
+                Assert.AreEqual(File.ReadAllText(pathToExpected), actualCode);
+            }
+        }
+
+        private static void CalculateDiagnosticsAndCode(DiagnosticAnalyzer diagnosticAnalyzer, Document document,
+            out List<Diagnostic> diagnostics,
+            out string actualCode)
+        {
+            diagnostics = GetDiagnostics(document.Project.GetCompilationAsync().Result, diagnosticAnalyzer).ToList();
+            actualCode = document.GetSyntaxRootAsync().Result.GetText().ToString();
+        }
+
+        #endregion
+
+        #region Generic helper
+
+        private static Document GetDocument(FileInfo file, string assemblyName, AdhocWorkspace workspace)
+        {
+            return workspace.CurrentSolution.AddProject(assemblyName,
+                    string.Format("{0}.dll", assemblyName), LanguageNames.CSharp)
+                .AddMetadataReference(MetadataReference.CreateFromFile(typeof(object).Assembly.Location))
+                .AddMetadataReference(MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location))
+                .AddDocument(file.Name, File.ReadAllText(file.FullName, Encoding.UTF8));
+        }
+
+        #endregion
+
+        #region Analyzer helpers
 
         internal static IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation,
             DiagnosticAnalyzer diagnosticAnalyzer)
@@ -68,31 +138,28 @@ namespace SonarLint.UnitTest
                 var compilationWithAnalyzer = compilationWithOptions
                     .WithAnalyzers(ImmutableArray.Create(diagnosticAnalyzer), null, tokenSource.Token);
 
-                return compilationWithAnalyzer.GetAnalyzerDiagnosticsAsync().Result;
+                return compilationWithAnalyzer.GetAnalyzerDiagnosticsAsync().Result
+                    .Where(diag => diag.Id == diagnosticAnalyzer.SupportedDiagnostics.Single().Id);
             }
         }
 
-        public static void Verify(string path, DiagnosticAnalyzer diagnosticAnalyzer)
-        {
-            Verify(path, "foo", diagnosticAnalyzer);
-        }
-        public static void VerifyInTest(string path, DiagnosticAnalyzer diagnosticAnalyzer)
-        {
-            Verify(path, ProjectTypeHelper.TestAssemblyNamePattern, diagnosticAnalyzer);
-        }
         private static void Verify(string path, string assemblyName, DiagnosticAnalyzer diagnosticAnalyzer)
         {
-            var file = new FileInfo(path);
-
             using (var workspace = new AdhocWorkspace())
             {
-                var document = workspace.CurrentSolution.AddProject(assemblyName,
-                    string.Format("{0}.dll", assemblyName), LanguageNames.CSharp)
-                    .AddMetadataReference(MetadataReference.CreateFromFile(typeof(object).Assembly.Location))
-                    .AddMetadataReference(MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location))
-                    .AddDocument(file.Name, File.ReadAllText(file.FullName, Encoding.UTF8));
+                var document = GetDocument(new FileInfo(path), assemblyName, workspace);
+                var compilation = document.Project.GetCompilationAsync().Result;
+                var diagnostics = GetDiagnostics(compilation, diagnosticAnalyzer);
+                var expected = ExpectedIssues(compilation.SyntaxTrees.First()).ToList();
 
-                Verify(document.Project, diagnosticAnalyzer);
+                foreach (var diagnostic in diagnostics)
+                {
+                    var line = diagnostic.GetLineNumberToReport();
+                    expected.Should().Contain(line);
+                    expected.Remove(line);
+                }
+
+                expected.Should().BeEquivalentTo(Enumerable.Empty<int>());
             }
         }
 
@@ -102,5 +169,38 @@ namespace SonarLint.UnitTest
                    where l.ToString().Contains("Noncompliant")
                    select l.LineNumber + 1;
         }
+
+        #endregion
+
+        #region Codefix helper
+
+        private static Document ApplyCodeFix(Document document, CodeAction codeAction)
+        {
+            var operations = codeAction.GetOperationsAsync(CancellationToken.None).Result;
+            var solution = operations.OfType<ApplyChangesOperation>().Single().ChangedSolution;
+            return solution.GetDocument(document.Id);
+        }
+
+        private static bool TryGetCodeActionToApply(string codeFixTitle, IEnumerable<CodeAction> codeActions,
+            out CodeAction codeAction)
+        {
+            codeAction = codeFixTitle != null
+                ? codeActions.SingleOrDefault(action => action.Title == codeFixTitle)
+                : codeActions.FirstOrDefault();
+
+            return codeAction != null;
+        }
+
+        private static IEnumerable<CodeAction> GetCodeActionsForDiagnostic(CodeFixProvider codeFixProvider, Document document,
+            Diagnostic diagnostic)
+        {
+            var actions = new List<CodeAction>();
+            var context = new CodeFixContext(document, diagnostic, (a, d) => actions.Add(a), CancellationToken.None);
+
+            codeFixProvider.RegisterCodeFixesAsync(context).Wait();
+            return actions;
+        }
+
+        #endregion
     }
 }

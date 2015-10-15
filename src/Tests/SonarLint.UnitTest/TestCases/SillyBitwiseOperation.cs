@@ -18,6 +18,7 @@ namespace Tests.Diagnostics
             result &= -1; // Noncompliant
             result |= 0;  // Noncompliant
             result ^= 0;  // Noncompliant
+            var result2 = result ^= 0;  // Noncompliant
 
             result = bitMask & 1; // Compliant
             result = bitMask | 1; // compliant

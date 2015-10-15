@@ -30,7 +30,18 @@ namespace SonarLint.UnitTest.Rules
         [TestCategory("Rule")]
         public void ThreadStaticNonStaticField()
         {
-            Verifier.Verify(@"TestCases\ThreadStaticNonStaticField.cs", new ThreadStaticNonStaticField());
+            Verifier.VerifyAnalyzer(@"TestCases\ThreadStaticNonStaticField.cs", new ThreadStaticNonStaticField());
+        }
+
+        [TestMethod]
+        [TestCategory("CodeFix")]
+        public void ThreadStaticNonStaticField_CodeFix()
+        {
+            Verifier.VerifyCodeFix(
+                @"TestCases\ThreadStaticNonStaticField.cs",
+                @"TestCases\ThreadStaticNonStaticField.Fixed.cs",
+                new ThreadStaticNonStaticField(),
+                new ThreadStaticNonStaticFieldCodeFixProvider());
         }
     }
 }

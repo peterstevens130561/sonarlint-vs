@@ -30,7 +30,18 @@ namespace SonarLint.UnitTest.Rules
         [TestCategory("Rule")]
         public void SuppressFinalizeUseless()
         {
-            Verifier.Verify(@"TestCases\SuppressFinalizeUseless.cs", new SuppressFinalizeUseless());
+            Verifier.VerifyAnalyzer(@"TestCases\SuppressFinalizeUseless.cs", new SuppressFinalizeUseless());
+        }
+
+        [TestMethod]
+        [TestCategory("CodeFix")]
+        public void SuppressFinalizeUseless_CodeFix()
+        {
+            Verifier.VerifyCodeFix(
+                @"TestCases\SuppressFinalizeUseless.cs",
+                @"TestCases\SuppressFinalizeUseless.Fixed.cs",
+                new SuppressFinalizeUseless(),
+                new SuppressFinalizeUselessCodeFixProvider());
         }
     }
 }
