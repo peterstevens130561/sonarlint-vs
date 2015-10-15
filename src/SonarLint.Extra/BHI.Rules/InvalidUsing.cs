@@ -27,23 +27,23 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarLint.Common;
 using SonarLint.Common.Sqale;
 using SonarLint.Helpers;
-using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace SonarLint.Rules
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [SqaleSubCharacteristic(SqaleSubCharacteristic.MaintainabilityCompliance)]
-    [SqaleConstantRemediation("10min")]
+    [SqaleConstantRemediation("5min")]
     [Rule(DiagnosticId, RuleSeverity, Description, IsActivatedByDefault)]
     [Tags("convention")]
-    public class Obsolete : DiagnosticAnalyzer
+    public class InvalidUsing : DiagnosticAnalyzer
     {
 
         internal const string DiagnosticId = "BHI1010";
-        internal const string Description = "Obsolete requires at least one argument, of which the first one must match regex";
-        internal const string MessageFormat = "[Obsolete(\"{0}\")] should follow convention as defined through regular expression {1}";
+        internal const string Description = "Some references should no longer be used";
+        internal const string MessageFormat = "This reference \"{0}\" should not be used for new code";
         internal const string Category = "SonarQube";
-        internal const Severity RuleSeverity = Severity.Critical;
+        internal const Severity RuleSeverity = Severity.Blocker;
         internal const bool IsActivatedByDefault = true;
 
         internal static readonly DiagnosticDescriptor Rule =
@@ -52,44 +52,31 @@ namespace SonarLint.Rules
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
-        [RuleParameter("format", PropertyType.RegularExpression, "Regular expression for obsolete to match","^since ([0-9]\\.)+[0-9]+ use .*$]")]
+        [RuleParameter("format", PropertyType.PropertySet, "Namespaces of invalid references, as regex")]
         public string Convention { get; set; }
-
 
         public override void Initialize(AnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var attributeList = (AttributeListSyntax)c.Node;
-
-                    var obsoleteSyntax= attributeList.Attributes.FirstOrDefault(a => {
-                        var name = a.Name.GetText().ToString();
-                        return Regex.IsMatch(name, @"$(System.)?Obsolete(Attribute)?$");
-                    });
-                    if(obsoleteSyntax == null)
+                    var usingDirective = (UsingDirectiveSyntax)c.Node;
+                    foreach(var child in usingDirective.ChildNodes())
                     {
-                        return;
-                    }
-                    var argumentList = obsoleteSyntax.ArgumentList;
-                    string firstArgument = "";
-                    if (argumentList != null)
-                    {
-                        var count = argumentList.Arguments.Count;
-                        if (count > 0)
+                        var identifier = child as IdentifierNameSyntax;
+                        if(identifier !=null)
                         {
-                            firstArgument = argumentList.Arguments.First().ToString();
-                            if (Regex.IsMatch(firstArgument, Convention))
+                            string name = "zucht";
+                            Regex regex = new Regex(Convention);
+                            if (regex.Matches(name).Count>0)
                             {
-                                return;
+                                c.ReportDiagnostic(Diagnostic.Create(Rule, c.Node.GetLocation(), name));
                             }
                         }
                     }
-                    c.ReportDiagnostic(Diagnostic.Create(Rule, attributeList.GetLocation(), firstArgument, Convention));
-
-
+                   
                 },
-                SyntaxKind.AttributeList);
+                SyntaxKind.UsingDirective);
         }
     }
 }
