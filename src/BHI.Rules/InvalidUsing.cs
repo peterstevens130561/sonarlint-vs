@@ -63,23 +63,7 @@ namespace SonarLint.Rules
                     var usingDirective = (UsingDirectiveSyntax)c.Node;
                     foreach(var child in usingDirective.ChildNodes())
                     {
-                        string name = null;
-                        var identifierNameSyntax = child as IdentifierNameSyntax;
-                        if(identifierNameSyntax !=null)
-                        {
-                            name = identifierNameSyntax.Identifier.ValueText;
-                        }
-
-                        var qualifiedName = child as QualifiedNameSyntax;
-                        if(qualifiedName !=null)
-                        {
-                            name = qualifiedName.GetText().ToString();
-                        }
-                        if(name==null)
-                        {
-                            return;
-                        }
-
+                       var name = child.GetText().ToString();
                         Regex regex = new Regex(Convention);
                             if (regex.Matches(name).Count>0)
                             {
