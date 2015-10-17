@@ -77,9 +77,6 @@
     <Compile Include="..\AssemblyInfo.Shared.cs">
       <Link>Properties\AssemblyInfo.Shared.cs</Link>
     </Compile>
-    <Compile Include="BHI.Rules\ConstructorShouldHaveFewParameters.cs" />
-    <Compile Include="BHI.Rules\InvalidUsing.cs" />
-    <Compile Include="BHI.Rules\Obsolete.cs" />
     <Compile Include="Common\IRuleTemplate.cs" />
     <Compile Include="Common\IRuleTemplateInstance.cs" />
     <Compile Include="Common\PropertyType.cs" />
@@ -93,7 +90,6 @@
     <Compile Include="Common\RuleDescriptors\SqaleDescriptor.cs" />
     <Compile Include="Common\RuleDescriptors\SqaleRemediation.cs" />
     <Compile Include="Common\RuleDescriptors\SqaleRemediationProperty.cs" />
-    <Compile Include="BHI.Rules\FieldNameConvention.cs" />
     <Compile Include="Utilities\RuleDetailBuilder.cs" />
     <Compile Include="Utilities\RuleFinder.cs" />
     <Compile Include="Rules\ClassName.cs" />
@@ -159,6 +155,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Rules.Description\BHI1010.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BHI.Rules\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

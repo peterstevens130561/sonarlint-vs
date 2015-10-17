@@ -24,13 +24,17 @@ using SonarLint.Rules;
 namespace SonarLint.UnitTest.Rules
 {
     [TestClass]
-    public class FieldNameTest
+    public class ConstructorShouldHaveFewParametersTest
     {
+        private readonly int MaxParametersForConstructor = 3;
+
         [TestMethod]
         [TestCategory("Rule")]
-        public void FieldName()
+        public void ConstructorShouldHaveFewParameters()
         {
-            Verifier.Verify(@"TestCases\FieldName.cs", new FieldNameConvention());
+            var rule = new ConstructorShouldHaveFewParameters();
+            rule.Convention = MaxParametersForConstructor;
+            Verifier.VerifyAnalyzer(@"Examples\ConstructorShouldHaveFewParametersExample.cs", rule);
         }
     }
 }

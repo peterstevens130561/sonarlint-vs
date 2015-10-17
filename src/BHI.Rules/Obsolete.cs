@@ -65,7 +65,8 @@ namespace SonarLint.Rules
 
                     var obsoleteSyntax= attributeList.Attributes.FirstOrDefault(a => {
                         var name = a.Name.GetText().ToString();
-                        return Regex.IsMatch(name, @"$(System.)?Obsolete(Attribute)?$");
+                        var isMatch= Regex.IsMatch(name, @"^(System.)?Obsolete(Attribute)?$");
+                        return isMatch;
                     });
                     if(obsoleteSyntax == null)
                     {

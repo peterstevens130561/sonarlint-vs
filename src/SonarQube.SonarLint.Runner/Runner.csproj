@@ -112,6 +112,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BHI.Rules\BHI.Rules.csproj">
+      <Project>{dca5c621-ce8f-4215-b909-a2abefa6f6cc}</Project>
+      <Name>BHI.Rules</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SonarLint.Extra\SonarLint.Extra.csproj">
       <Project>{4c1bb6ce-645f-400b-b491-af7bb40e5c01}</Project>
       <Name>SonarLint.Extra</Name>

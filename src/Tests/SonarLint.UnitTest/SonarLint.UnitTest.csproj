@@ -80,24 +80,24 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Composition.AttributedModel, Version=1.0.30.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Microsoft.Composition.1.0.30\lib\portable-net45+win8+wp8+wpa81\System.Composition.AttributedModel.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System.Composition.Convention, Version=1.0.30.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Microsoft.Composition.1.0.30\lib\portable-net45+win8+wp8+wpa81\System.Composition.Convention.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System.Composition.Hosting, Version=1.0.30.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Microsoft.Composition.1.0.30\lib\portable-net45+win8+wp8+wpa81\System.Composition.Hosting.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System.Composition.Runtime, Version=1.0.30.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Microsoft.Composition.1.0.30\lib\portable-net45+win8+wp8+wpa81\System.Composition.Runtime.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System.Composition.TypedParts, Version=1.0.30.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Microsoft.Composition.1.0.30\lib\portable-net45+win8+wp8+wpa81\System.Composition.TypedParts.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System.Reflection.Metadata, Version=1.0.21.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\System.Reflection.Metadata.1.0.21\lib\portable-net45+win8\System.Reflection.Metadata.dll</HintPath>
@@ -123,46 +123,6 @@
       <Link>Properties\AssemblyInfo.Shared.cs</Link>
     </Compile>
     <Compile Include="Attributes\SqaleTest.cs" />
-    <Compile Include="BHI.Rules\InvalidUsingTest.cs" />
-    <Compile Include="BHI.Rules\CommentedOutAssertTest.cs" />
-    <Compile Include="BHI.Rules\StringLocalizationTest .cs" />
-    <Compile Include="BHI.Rules\ConstructorShouldHaveFewParametersTests.cs" />
-    <Compile Include="BHI.Rules\ObsoleteTest.cs" />
-    <Compile Include="BHI.Rules\Test.cs" />
-    <Compile Include="BHI.Rules\RegionInDeclarationTest.cs" />
-    <Compile Include="BHI.Rules\RegionInBlockTest.cs" />
-    <Compile Include="BHI.Rules\ConditionalCompilationTest.cs" />
-    <Compile Include="BHI.Rules\FieldNameTest.cs" />
-    <None Include="BHI.TestCases\ConditionalCompilationExample.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="BHI.TestCases\StringLocalizationExample.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="BHI.TestCases\RegionInDeclarationExample.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="BHI.TestCases\RegionInBlockExample.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="BHI.TestCases\CommentedOutAssertExample.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="BHI.TestCases\SingletonExample.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="BHI.TestCases\Example.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="BHI.TestCases\InvalidUsingExample.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <Compile Include="BHI.TestCases\ConstructorShouldHaveFewParametersExample.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <None Include="BHI.TestCases\ObsoleteExample.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <Compile Include="Common\DistrubtionTest.cs" />
     <Compile Include="Common\RuleDescriptorTest.cs" />
     <Compile Include="Common\RuleFinderTest.cs" />
@@ -176,9 +136,9 @@
     <Compile Include="Helpers\EquivalenceCheckerTest.cs" />
     <Compile Include="Common\MetricsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BHI.Rules\ComparisonNanTest.cs" />
     <Compile Include="Rules\RedundantArgumentTest.cs" />
-    <Compile Include="Rules\ConditionalSimplificationTest.cs" />    <Compile Include="Rules\MethodParameterUnusedTest.cs" />
+    <Compile Include="Rules\ConditionalSimplificationTest.cs" />
+    <Compile Include="Rules\MethodParameterUnusedTest.cs" />
     <Compile Include="Rules\MemberShadowsOuterStaticMemberTest.cs" />
     <Compile Include="Rules\OrderByRepeatedTest.cs" />
     <Compile Include="Rules\SuppressFinalizeUselessTest.cs" />
@@ -276,6 +236,10 @@
     <Compile Include="Rules\InsecureHashAlgorithmTest.cs" />
     <Compile Include="Rules\ValuesUselesslyIncrementedTest.cs" />
     <Compile Include="Rules\UseCurlyBracesTest.cs" />
+    <None Include="TestCases\VirtualEventField.Fixed.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Compile Include="Verifier.cs" />
     <None Include="app.config" />
     <None Include="TestCases\ConditionalsWithSameCondition.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -457,17 +421,72 @@
     <None Include="TestCases\MemberShadowsOuterStaticMember.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-   <None Include="TestCases\RedundantParentheses.Fixed.cs">
+    <None Include="TestCases\RedundantParentheses.Fixed.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="TestCases\OrderByRepeated.Fixed.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>    <None Include="TestCases\ComparisonNaN.cs">
+    </None>
+    <None Include="TestCases\ComparisonNaN.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="TestCases\FieldName.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>    <Compile Include="Verifier.cs" />
+    </None>
+    <None Include="TestCases\BooleanCheckInverted.Fixed.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestCases\BooleanLiteralUnnecessary.Fixed.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestCases\CatchRethrow.Fixed.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestCases\ConditionalSimplification.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestCases\ConditionalSimplification.Fixed.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestCases\FieldShouldBeReadonly.Fixed.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestCases\GenericTypeParameterEmptinessChecking.Fixed.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestCases\IfConditionalAlwaysTrueOrFalse.Fixed.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestCases\RedundantArgument.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestCases\RedundantArgument.Named.Fixed.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestCases\RedundantArgument.NoNamed.Fixed.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestCases\RedundantCast.Fixed.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestCases\SillyBitwiseOperation.Fixed.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestCases\SuppressFinalizeUseless.Fixed.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestCases\TernaryOperatorPointless.Fixed.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestCases\ThreadStaticNonStaticField.Fixed.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestCases\UnaryPrefixOperatorRepeated.Fixed.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestCases\Verifier.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="TestCases\UseCurlyBraces.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -616,6 +635,10 @@
       <Project>{d1ae804f-ae78-4883-b3d6-9e3c4026def6}</Project>
       <Name>SonarLint</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BHI.Rules\" />
+    <Folder Include="BHI.TestCases\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

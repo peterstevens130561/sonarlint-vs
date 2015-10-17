@@ -59,6 +59,7 @@ namespace SonarLint.Rules
                 c =>
                 {
                     var expression = (BinaryExpressionSyntax)c.Node;
+                    
                     var isComparison= expression.OperatorToken.IsKind(SyntaxKind.ExclamationEqualsToken);
                     foreach (SyntaxNode child in expression.ChildNodes())
                     {
@@ -75,7 +76,8 @@ namespace SonarLint.Rules
                         }
                         if (exp.Identifier.Text == "Double" && member.Name.Identifier.Text == "NaN")
                         {
-                            c.ReportDiagnostic(Diagnostic.Create(Rule, expression.GetLocation()));
+                            var diagnostic = Diagnostic.Create(Rule, expression.GetLocation());
+                            c.ReportDiagnostic(diagnostic);
                         }
 
                     }

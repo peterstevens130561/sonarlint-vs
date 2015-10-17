@@ -24,13 +24,13 @@ using SonarLint.Rules;
 namespace SonarLint.UnitTest.Rules
 {
     [TestClass]
-    public class ComparisonNanTest
+    public class RegionInBlockTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ComparisonNaN()
+        public void RegionInBlockExample()
         {
-            Verifier.Verify(@"TestCases\ComparisonNan.cs", new ComparisonNaN());
+            Verifier.VerifyAnalyzer(@"Examples\RegionInBlockExample.cs", new RegionInBlock());
         }
     }
 }

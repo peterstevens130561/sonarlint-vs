@@ -1,5 +1,4 @@
 ﻿/*
-/*
  * SonarLint for Visual Studio
  * Copyright (C) 2015 SonarSource
  * sonarqube@googlegroups.com
@@ -25,13 +24,13 @@ using SonarLint.Rules;
 namespace SonarLint.UnitTest.Rules
 {
     [TestClass]
-    public class CommentedOutAssertTest
+    public class FieldNameTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void CommentedOutAssert()
+        public void FieldName()
         {
-            Verifier.Verify(@"BHI.TestCases\CommentedOutAssertExample.cs", new CommentedOutAssert());
+            Verifier.VerifyAnalyzer(@"Examples\FieldName.cs", new FieldNameConvention());
         }
     }
 }

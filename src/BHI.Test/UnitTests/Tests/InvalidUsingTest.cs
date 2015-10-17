@@ -24,17 +24,15 @@ using SonarLint.Rules;
 namespace SonarLint.UnitTest.Rules
 {
     [TestClass]
-    public class ConstructorShouldHaveFewParametersTest
+    public class InvalidUsingTest
     {
-        private readonly int MaxParametersForConstructor = 3;
-
         [TestMethod]
         [TestCategory("Rule")]
-        public void StringLocalization()
+        public void InvalidUsing()
         {
-            var rule = new ConstructorShouldHaveFewParameters();
-            rule.Convention = MaxParametersForConstructor;
-            Verifier.Verify(@"BHI.TestCases\ConstructorShouldHaveFewParametersExample.cs", rule);
+            var invalidUsing = new InvalidUsing();
+            invalidUsing.Convention = "oh yeah";
+            Verifier.VerifyAnalyzer(@"Examples\InvalidUsingExample.cs", new InvalidUsing());
         }
     }
 }

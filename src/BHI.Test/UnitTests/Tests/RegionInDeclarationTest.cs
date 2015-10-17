@@ -24,15 +24,13 @@ using SonarLint.Rules;
 namespace SonarLint.UnitTest.Rules
 {
     [TestClass]
-    public class InvalidUsingTest
+    public class RegionInDeclarationTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void InvalidUsing()
+        public void RegionInDeclaration()
         {
-            var invalidUsing = new InvalidUsing();
-            invalidUsing.Convention = "oh yeah";
-            Verifier.Verify(@"BHI.TestCases\InvalidUsingExample.cs", new InvalidUsing());
+            Verifier.VerifyAnalyzer(@"Examples\RegionInDeclarationExample.cs", new RegionInDeclaration());
         }
     }
 }

@@ -30,7 +30,7 @@ namespace SonarLint.UnitTest.Rules
         [TestCategory("Rule")]
         public void StringLocalization()
         {
-            Verifier.Verify(@"BHI.TestCases\StringLocalizationExample.cs", new StringLocalization());
+            Verifier.VerifyAnalyzer(@"Examples\StringLocalizationExample.cs", new StringLocalization());
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿/*
+/*
  * SonarLint for Visual Studio
  * Copyright (C) 2015 SonarSource
  * sonarqube@googlegroups.com
@@ -24,13 +25,13 @@ using SonarLint.Rules;
 namespace SonarLint.UnitTest.Rules
 {
     [TestClass]
-    public class ConditionalCompilationTest
+    public class CommentedOutAssertTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ConditionalCompilation()
+        public void CommentedOutAssert()
         {
-            Verifier.Verify(@"BHI.TestCases\ConditionalCompilationExample.cs", new ConditionalCompilation());
+            Verifier.VerifyAnalyzer(@"Examples\CommentedOutAssertExample.cs", new CommentedOutAssert());
         }
     }
 }
