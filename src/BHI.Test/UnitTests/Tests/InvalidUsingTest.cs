@@ -31,8 +31,8 @@ namespace SonarLint.UnitTest.Rules
         public void InvalidUsing()
         {
             var invalidUsing = new InvalidUsing();
-            invalidUsing.Convention = "oh yeah";
-            Verifier.VerifyAnalyzer(@"Examples\InvalidUsingExample.cs", new InvalidUsing());
+            invalidUsing.Convention = "DotNetBar|Peter.Fun.Illegal.*";
+            Verifier.VerifyAnalyzer(@"Examples\InvalidUsingExample.cs", invalidUsing);
         }
     }
 }

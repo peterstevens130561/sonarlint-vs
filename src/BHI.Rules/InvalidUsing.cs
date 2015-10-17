@@ -63,16 +63,28 @@ namespace SonarLint.Rules
                     var usingDirective = (UsingDirectiveSyntax)c.Node;
                     foreach(var child in usingDirective.ChildNodes())
                     {
-                        var identifier = child as IdentifierNameSyntax;
-                        if(identifier !=null)
+                        string name = null;
+                        var identifierNameSyntax = child as IdentifierNameSyntax;
+                        if(identifierNameSyntax !=null)
                         {
-                            string name = "zucht";
-                            Regex regex = new Regex(Convention);
+                            name = identifierNameSyntax.Identifier.ValueText;
+                        }
+
+                        var qualifiedName = child as QualifiedNameSyntax;
+                        if(qualifiedName !=null)
+                        {
+                            name = qualifiedName.GetText().ToString();
+                        }
+                        if(name==null)
+                        {
+                            return;
+                        }
+
+                        Regex regex = new Regex(Convention);
                             if (regex.Matches(name).Count>0)
                             {
                                 c.ReportDiagnostic(Diagnostic.Create(Rule, c.Node.GetLocation(), name));
                             }
-                        }
                     }
                    
                 },
