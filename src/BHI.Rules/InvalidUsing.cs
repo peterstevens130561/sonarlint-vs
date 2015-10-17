@@ -27,7 +27,6 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarLint.Common;
 using SonarLint.Common.Sqale;
 using SonarLint.Helpers;
-using System.Text.RegularExpressions;
 
 namespace SonarLint.Rules
 {
@@ -61,16 +60,16 @@ namespace SonarLint.Rules
                 c =>
                 {
                     var usingDirective = (UsingDirectiveSyntax)c.Node;
-                    foreach(var child in usingDirective.ChildNodes())
+                    foreach (var child in usingDirective.ChildNodes())
                     {
-                       var name = child.GetText().ToString();
+                        var name = child.GetText().ToString();
                         Regex regex = new Regex(Convention);
-                            if (regex.Matches(name).Count>0)
-                            {
-                                c.ReportDiagnostic(Diagnostic.Create(Rule, c.Node.GetLocation(), name));
-                            }
+                        if (regex.Matches(name).Count > 0)
+                        {
+                            c.ReportDiagnostic(Diagnostic.Create(Rule, c.Node.GetLocation(), name));
+                        }
                     }
-                   
+
                 },
                 SyntaxKind.UsingDirective);
         }
