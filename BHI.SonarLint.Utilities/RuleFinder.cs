@@ -23,28 +23,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarLint.Rules;
 using SonarLint.Common;
 
-namespace SonarLint.Utilities
+namespace BHI.SonarLint.Utilities
 {
     public class RuleFinder
     {
         private readonly List<Type> diagnosticAnalyzers;
 
-
+        public static Assembly GetBHIAssembly()
+        {
+            return Assembly.LoadFrom("BHI.Rules.dll");
+        }
         public static Assembly GetPackagedRuleAssembly()
         {
-            return Assembly.LoadFrom(typeof(EmptyStatement).Assembly.Location);
+            return Assembly.LoadFrom("SonarLint.dll");
         }
         public static Assembly GetExtraRuleAssembly()
         {
-            return Assembly.LoadFrom(typeof(MagicNumber).Assembly.Location);
+            return Assembly.LoadFrom("SonarLint.Extra.dll");
         }
 
         public RuleFinder()
         {
-            diagnosticAnalyzers = new[] {GetPackagedRuleAssembly(), GetExtraRuleAssembly()}
+            diagnosticAnalyzers = new[] {GetPackagedRuleAssembly(), GetExtraRuleAssembly(),GetBHIAssembly()}
                 .SelectMany(a => a.GetTypes())
                 .Where(t => t.IsSubclassOf(typeof (DiagnosticAnalyzer)))
                 .Where(t => t.GetCustomAttributes<RuleAttribute>().Any())
@@ -58,6 +60,13 @@ namespace SonarLint.Utilities
                 .Where(analyzerType =>
                     !analyzerType.GetProperties()
                         .Any(p => p.GetCustomAttributes<RuleParameterAttribute>().Any()));
+        }
+
+
+        public IEnumerable<Type> GetAnalyzerTypes()
+        {
+            return diagnosticAnalyzers
+                .Where(analyzerType => !IsRuleTemplate(analyzerType));
         }
 
         public static bool IsRuleTemplate(Type analyzerType)

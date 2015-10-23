@@ -493,33 +493,6 @@
     <EmbeddedResource Include="Rules.Description\S3240.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\BHI1002.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\BHI1004.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\BHI1000.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\BHI1001.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\BHI1003.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\BHI1005.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\BHI1007.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\BHI1006.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\BHI1008.html" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="BHI.Rules\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -111,11 +111,18 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <None Include="Examples\ReadAndWriteLockAppliedExample.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Compile Include="Tests\ReadAndWriteLockAppliedExampleTest.cs" />
+    <Compile Include="Utilities\RuleFinderTest.cs" />
     <None Include="Examples\CommentedOutAssertExample.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -167,6 +174,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\BHI.SonarLint.Utilities\BHI.SonarLint.Utilities.csproj">
+      <Project>{4165c89c-c02f-43b5-a4a7-502fc8f77391}</Project>
+      <Name>BHI.SonarLint.Utilities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\BHI.Rules\BHI.Rules.csproj">
       <Project>{dca5c621-ce8f-4215-b909-a2abefa6f6cc}</Project>
       <Name>BHI.Rules</Name>

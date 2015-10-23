@@ -148,15 +148,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\BHI1000.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\BHI1001.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\BHI1010.html" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="BHI.Rules\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
