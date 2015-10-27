@@ -16,7 +16,7 @@ namespace BHI.UnitTest.Utilities
         {
             var ruleFinder = new RuleFinder();
             var count=ruleFinder.GetParameterlessAnalyzerTypes().Count();
-            Assert.AreEqual(97, count, "Should have number of analyzers");
+            Assert.AreEqual(98, count, "Should have number of analyzers");
         }
 
         [TestMethod]
@@ -33,7 +33,7 @@ namespace BHI.UnitTest.Utilities
             var ruleFinder = new RuleFinder();
             var analyzers = ruleFinder.GetAllAnalyzerTypes();
             var bhiAnalyzers = analyzers.Where( c  => c.Assembly.FullName.Contains("BHI"));
-            Assert.AreEqual(10, bhiAnalyzers.Count(), "Should have number of analyzers");
+            Assert.AreEqual(12, bhiAnalyzers.Count(), "Should have number of analyzers");
         }
 
         [TestMethod]

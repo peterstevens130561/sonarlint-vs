@@ -38,7 +38,7 @@ namespace SonarLint.Rules
     public class InvalidUsing : DiagnosticAnalyzer
     {
 
-        internal const string DiagnosticId = "BHI1010";
+        internal const string DiagnosticId = "BHI1012";
         internal const string Description = "Some references should no longer be used";
         internal const string MessageFormat = "This reference \"{0}\" should not be used for new code";
         internal const string Category = "SonarQube";
@@ -46,7 +46,7 @@ namespace SonarLint.Rules
         internal const bool IsActivatedByDefault = true;
 
         internal static readonly DiagnosticDescriptor Rule =
-            new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category,
+            new DiagnosticDescriptor(DiagnosticId, DiagnosticId + " : " + Description, MessageFormat, Category,
                 RuleSeverity.ToDiagnosticSeverity(), IsActivatedByDefault);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }

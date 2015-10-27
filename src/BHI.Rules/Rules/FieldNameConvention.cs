@@ -39,7 +39,7 @@ namespace SonarLint.Rules
     {
 
         internal const string DiagnosticId = "BHI1001";
-        internal const string Description = "Field names should comply with a naming convention";
+        internal const string Description = DiagnosticId + " : Field names should comply with a naming convention";
         internal const string MessageFormat = "Rename this field \"{1}\" to match the regular expression: {0}";
         internal const string Category = "SonarQube";
         internal const Severity RuleSeverity = Severity.Minor;

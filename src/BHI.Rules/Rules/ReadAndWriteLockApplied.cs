@@ -31,7 +31,7 @@ using System.Linq;
 namespace SonarLint.Rules
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [SqaleConstantRemediation("5min")]
+    [SqaleConstantRemediation("10min")]
     [SqaleSubCharacteristic(SqaleSubCharacteristic.LogicReliability)]
     [Rule(DiagnosticId, RuleSeverity, Title, IsActivatedByDefault)]
     [Tags("bug")]
@@ -41,13 +41,13 @@ namespace SonarLint.Rules
         internal const string Title = "Incorrect use of Read/Write Lock";
         internal const string Description =
             "Incorrect use of Read/Write Lock";
-        internal const string MessageFormat = "Incorrect use of Read/Write Lock";
+        internal const string MessageFormat = "Incorrect use of Read/Write Lock reason: {}";
         internal const string Category = "SonarQube";
         internal const Severity RuleSeverity = Severity.Critical;
-        internal const bool IsActivatedByDefault = true;
+        internal const bool IsActivatedByDefault = false;
 
         internal static readonly DiagnosticDescriptor Rule =
-            new DiagnosticDescriptor(DiagnosticId, Title, MessageFormat, Category,
+            new DiagnosticDescriptor(DiagnosticId, DiagnosticId + ": " + Title, MessageFormat, Category,
                 RuleSeverity.ToDiagnosticSeverity(), IsActivatedByDefault,
                 helpLinkUri: DiagnosticId.GetHelpLink(),
                 description: Description);
@@ -56,12 +56,13 @@ namespace SonarLint.Rules
 
         public override void Initialize(AnalysisContext context)
         {
+
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     UsingStatementSyntax usingStatement = (UsingStatementSyntax)c.Node;
-
                     VariableDeclarationSyntax declaration = usingStatement.Declaration;
+
                     var symbolInfo = c.SemanticModel.GetSymbolInfo(declaration.Type);
                     ITypeSymbol typeSymbol = (ITypeSymbol)symbolInfo.Symbol;
                     while (typeSymbol != null && isNotLock(typeSymbol))
@@ -72,30 +73,59 @@ namespace SonarLint.Rules
                     {
                         return;
                     }
+                    // From here on we know that we have a using statement with a read/write lock
                     var variableName = declaration.Variables.First().Identifier;
-
+                  
                     SyntaxNode block = usingStatement.ChildNodes().Where(n => n as BlockSyntax != null).FirstOrDefault();
                     if (block == null)
                     {
-                        return;
-                    }
-                    var firstStatement = block.ChildNodes().First() as IfStatementSyntax;
-                    if (firstStatement == null)
-                    {
-                        // first should check on Applied
-                        var diagnostic = Diagnostic.Create(Rule, usingStatement.GetLocation());
+                        var diagnostic = Diagnostic.Create(Rule, usingStatement.GetLocation(),"using followed by empty statement");
                         c.ReportDiagnostic(diagnostic);
                         return;
                     }
 
-                    var expression = ((IfStatementSyntax)firstStatement).Condition;
-                    var appliedCondition = variableName + ".LockApplied()";
-                    if (!expression.ToString().Contains(appliedCondition))
+                    IfStatementSyntax firstIfStatement = block.ChildNodes().FirstOrDefault() as IfStatementSyntax;
+                    if (firstIfStatement== null)
                     {
-                        var diagnostic = Diagnostic.Create(Rule, usingStatement.GetLocation());
+                        // first should check on Applied
+                        var diagnostic = Diagnostic.Create(Rule, usingStatement.GetLocation(),"not checked whether lock was succcessful");
                         c.ReportDiagnostic(diagnostic);
                         return;
                     }
+
+                    var expression = ((IfStatementSyntax)firstIfStatement).Condition as PrefixUnaryExpressionSyntax;
+                    var appliedCondition = variableName + ".LockApplied()";
+                    if (expression == null || !expression.ToString().Contains(appliedCondition))
+                    {
+                        var diagnostic = Diagnostic.Create(Rule, usingStatement.GetLocation(),"incorrect check on lock");
+                        c.ReportDiagnostic(diagnostic);
+                        return;
+                    }
+                    var ifAppliedNode= firstIfStatement.ChildNodes().Where(node => node as BlockSyntax != null).FirstOrDefault();
+
+                    if (ifAppliedNode==null)
+                    {
+                        var diagnostic = Diagnostic.Create(Rule, usingStatement.GetLocation(), "empty statement");
+                        c.ReportDiagnostic(diagnostic);
+                        return;
+                    }
+
+                    var lastStatement = ifAppliedNode.ChildNodes().Where(node => node as ReturnStatementSyntax != null).LastOrDefault();
+                    if(lastStatement == null)
+                    {
+                        var diagnostic = Diagnostic.Create(Rule, usingStatement.GetLocation(), "empty statement");
+                        c.ReportDiagnostic(diagnostic);
+                        return;
+                    }
+                    ReturnStatementSyntax returnStatement = (ReturnStatementSyntax)lastStatement;
+                    if (!"false".Equals(returnStatement.Expression.ToString())){
+                        var diagnostic = Diagnostic.Create(Rule, returnStatement.GetLocation(), "does not return literal false");
+                        c.ReportDiagnostic(diagnostic);
+                        return;
+                    }
+
+
+
                 },
                 SyntaxKind.UsingStatement
              );

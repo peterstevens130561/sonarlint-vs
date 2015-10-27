@@ -74,6 +74,7 @@
     <Compile Include="Rules\RegionInDeclaration.cs" />
     <Compile Include="Rules\ReadAndWriteLockApplied.cs" />
     <Compile Include="Rules\StringLocalization.cs" />
+    <Compile Include="Rules\ToDo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SonarLint.Extra\SonarLint.Extra.csproj">
@@ -121,6 +122,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Rules.Description\BHI1010.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Rules.Description\BHI1009.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Rules.Description\BHI1012.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -49,7 +49,7 @@ namespace SonarLint.Rules
         internal const bool IsActivatedByDefault = true;
 
         internal static readonly DiagnosticDescriptor Rule =
-            new DiagnosticDescriptor(DiagnosticId, Title, MessageFormat, Category,
+            new DiagnosticDescriptor(DiagnosticId, DiagnosticId + " : " + Title, MessageFormat, Category,
                 RuleSeverity.ToDiagnosticSeverity(), IsActivatedByDefault,
                 helpLinkUri: DiagnosticId.GetHelpLink(),
                 description: Description);

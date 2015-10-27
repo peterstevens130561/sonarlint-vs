@@ -7,11 +7,112 @@ namespace Tests.Diagnostics
 
     class ReadAndWriteLockAppliedExample
     {
-        protected override void BindDataSet()
+        private void MissingReturn()
+        {
+            using (ReadLock readLock = new Gotham(fun)) //Noncompliant
+            // The first one is a test, but is this the right pattern
+            { 
+                if (!readLock.LockApplied()) 
+                {
+                    var gemDataSet = simCase.Input.DataSet as joaGEMDataSet;
+                    if (gemDataSet != null)
+                    {
+                        m_DataViewUNLOADSTR.Table = gemDataSet.UNLOADSTR;
+                    }
+                }
+            }
+
+        }
+        private void uselessLock()
         {
             String fun = "fun";
-            //This one should be ok
+
+            using (ReadLock readLock = new ReadLock()) //Noncompliant
+            {
+
+            }
+
+            using (ReadLock readLock = new ReadLock()) ; //Noncompliant
+            {
+                var gemDataSet = simCase.Input.DataSet as joaGEMDataSet;
+                if (gemDataSet != null)
+                {
+                    m_DataViewUNLOADSTR.Table = gemDataSet.UNLOADSTR;
+                }
+            }
+
+        }
+        private Boolean CompliantLock() {
             using (ReadLock readLock = new Gotham(fun))
+            {
+                if (!readLock.LockApplied())
+                {
+                    return false;
+                }
+
+                var gemDataSet = simCase.Input.DataSet as joaGEMDataSet;
+                if (gemDataSet != null)
+                {
+                    m_DataViewUNLOADSTR.Table = gemDataSet.UNLOADSTR;
+                }
+
+            }
+
+        }
+
+        private Boolean NonCompliantReturningTrue()
+        {
+            using (ReadLock readLock = new Gotham(fun))
+            {
+                if (!readLock.LockApplied()) 
+                {
+                    return true; //Noncompliant
+                }
+
+                var gemDataSet = simCase.Input.DataSet as joaGEMDataSet;
+                if (gemDataSet != null)
+                {
+                    m_DataViewUNLOADSTR.Table = gemDataSet.UNLOADSTR;
+                }
+
+            }
+        }
+
+        private Boolean CompliantLock() {
+            using (ReadLock readLock = new Gotham(fun))
+            {
+                if (!readLock.LockApplied())
+                {
+                    return false;
+                }
+
+                var gemDataSet = simCase.Input.DataSet as joaGEMDataSet;
+                if (gemDataSet != null)
+                {
+                    m_DataViewUNLOADSTR.Table = gemDataSet.UNLOADSTR;
+                }
+
+            }
+
+        }
+        }
+        private void NonCompliantLocks() { 
+            using (ReadLock readLock = new Gotham(fun)) //Noncompliant
+            {
+                if (readLock.LockApplied())
+                {
+                    return;
+                }
+
+                var gemDataSet = simCase.Input.DataSet as joaGEMDataSet;
+                if (gemDataSet != null)
+                {
+                    m_DataViewUNLOADSTR.Table = gemDataSet.UNLOADSTR;
+                }
+
+            }
+            //This one should be not ok
+            using (ReadLock readLock = new Gotham(fun)) //Noncompliant
             {
                 if (readLock.LockApplied())
                 {
@@ -67,18 +168,7 @@ namespace Tests.Diagnostics
             }
 
 
-            // The first one is a test, but is this the right pattern
-            using (ReadLock readLock = new Gotham(fun))
-            {
-                if (!readLock.LockApplied()) // What to do with this one?
-                {
-                    var gemDataSet = simCase.Input.DataSet as joaGEMDataSet;
-                    if (gemDataSet != null)
-                    {
-                        m_DataViewUNLOADSTR.Table = gemDataSet.UNLOADSTR;
-                    }
-                }
-            }
+
 
             using (ReadLock readLock = new Gotham(fun)) //Noncompliant
             {
@@ -91,12 +181,13 @@ namespace Tests.Diagnostics
                         m_DataViewUNLOADSTR.Table = gemDataSet.UNLOADSTR;
                     }
                 }
+                int a = 4 == 5 ? 0 : 3;
             }
 
             // bit of nonsense, should we deal with this one?
-            using (ReadLock readLock = new ReadLock()) ;
 
-            //
+
+
         }
 
         //Used to find cases where we use a method to return a lock (yikes)
@@ -125,6 +216,7 @@ namespace Tests.Diagnostics
         internal class Gotham : ReadLock
         {
         }
+
 
 
 

@@ -32,7 +32,7 @@ namespace BHI.SonarLint.Utilities
 {
     public static class RuleDetailBuilder
     {
-        private const string RuleDescriptionPathPattern = "SonarLint.Rules.Description.{0}.html";
+        private const string RuleDescriptionPathPattern = "Rules.Description.{0}.html";
 
         public static IEnumerable<RuleDetail> GetAllRuleDetails()
         {
@@ -151,7 +151,7 @@ namespace BHI.SonarLint.Utilities
 
             if (resource == null)
             {
-                throw new InvalidDataException(string.Format("Could not locate resource for rule {0}", rule.Key));
+                throw new InvalidDataException(string.Format("Could not locate resource for rule {0} {1} in assembly {2}", rule.Key,analyzerType.FullName,analyzerType.Assembly.FullName));
             }
 
             using (var stream = analyzerType.Assembly.GetManifestResourceStream(resource))

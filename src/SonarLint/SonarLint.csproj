@@ -120,7 +120,6 @@
     <Compile Include="Rules\SuppressFinalizeUselessCodeFixProvider.cs" />
     <Compile Include="Rules\SuppressFinalizeUseless.cs" />
     <Compile Include="Rules\FieldInitializedToDefault.cs" />
-    <Compile Include="Rules\ToDo.cs" />
     <Compile Include="Rules\RedundantParenthesesCodeFixProvider.cs" />
     <Compile Include="Rules\UnaryPrefixOperatorRepeated.cs" />
     <Compile Include="Rules\GetHashCodeEqualsOverride.cs" />

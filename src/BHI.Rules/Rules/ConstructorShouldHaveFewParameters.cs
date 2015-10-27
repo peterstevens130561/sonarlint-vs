@@ -46,7 +46,7 @@ namespace SonarLint.Rules
         internal const bool IsActivatedByDefault = true;
 
         internal static readonly DiagnosticDescriptor Rule =
-            new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category,
+            new DiagnosticDescriptor(DiagnosticId, DiagnosticId + " : " + Description, MessageFormat, Category,
                 RuleSeverity.ToDiagnosticSeverity(), IsActivatedByDefault);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
