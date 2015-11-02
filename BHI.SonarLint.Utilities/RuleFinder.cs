@@ -24,6 +24,7 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarLint.Common;
+using System.IO;
 
 namespace BHI.SonarLint.Utilities
 {
@@ -31,17 +32,23 @@ namespace BHI.SonarLint.Utilities
     {
         private readonly List<Type> diagnosticAnalyzers;
 
-        public static Assembly GetBHIAssembly()
+        private Assembly LoadAssembly(String name)
         {
-            return Assembly.LoadFrom("BHI.Rules.dll");
+            String assemblyDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            return Assembly.LoadFrom(assemblyDir + @"\" + name);
+
         }
-        public static Assembly GetPackagedRuleAssembly()
+        public  Assembly GetBHIAssembly()
         {
-            return Assembly.LoadFrom("SonarLint.dll");
+            return LoadAssembly("BHI.Rules.dll");
         }
-        public static Assembly GetExtraRuleAssembly()
+        public  Assembly GetPackagedRuleAssembly()
         {
-            return Assembly.LoadFrom("SonarLint.Extra.dll");
+            return LoadAssembly("SonarLint.dll");
+        }
+        public  Assembly GetExtraRuleAssembly()
+        {
+            return LoadAssembly("SonarLint.Extra.dll");
         }
 
         public RuleFinder()

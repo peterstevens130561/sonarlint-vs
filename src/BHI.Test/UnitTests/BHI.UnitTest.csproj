@@ -121,6 +121,9 @@
     <None Include="Examples\ReadAndWriteLockAppliedExample.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Examples\ReadAndWriteLockBasicExample.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Compile Include="Tests\ReadAndWriteLockAppliedExampleTest.cs" />
     <Compile Include="Utilities\RuleFinderTest.cs" />
     <None Include="Examples\CommentedOutAssertExample.cs">

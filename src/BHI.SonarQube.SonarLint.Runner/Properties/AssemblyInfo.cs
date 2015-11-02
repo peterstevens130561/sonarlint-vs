@@ -1,5 +1,4 @@
 ﻿/*
-/*
  * SonarLint for Visual Studio
  * Copyright (C) 2015 SonarSource
  * sonarqube@googlegroups.com
@@ -19,26 +18,9 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarLint.Rules;
+using System.Reflection;
 
-namespace SonarLint.UnitTest.Rules
-{
-    [TestClass]
-    public class ReadAndWriteLockExampleTest
-    {
+[assembly: AssemblyTitle("SonarLint.Runner")]
+[assembly: AssemblyProduct("SonarLint.Runner")]
+[assembly: AssemblyDescription("")]
 
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void ReadAndWriteLockBasicApplied()
-        {
-            Verifier.VerifyAnalyzer(@"Examples\ReadAndWriteLockBasicExample.cs", new ReadAndWriteLockApplied());
-        }
-
-        [TestCategory("Rule")]
-        public void ReadAndWriteLockApplied()
-        {
-            Verifier.VerifyAnalyzer(@"Examples\ReadAndWriteLockAppliedExample.cs", new ReadAndWriteLockApplied());
-        }
-    }
-}
