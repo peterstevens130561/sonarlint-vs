@@ -75,8 +75,12 @@ namespace SonarLint.Runner
                     try
                     {
 
-                        var syntaxTree = compilation.SyntaxTrees.Where(tree => IsMatchingFile(tree, file)).First();
-
+                        var syntaxTree = compilation.SyntaxTrees.Where(tree => IsMatchingFile(tree, file)).FirstOrDefault();
+                        if(syntaxTree ==null)
+                        {
+                            Console.Error.WriteLine("Could not find syntaxTree for " + file);
+                            continue;
+                        }
                         var metrics = new Metrics(syntaxTree);
 
                         xmlOut.WriteStartElement("File");
